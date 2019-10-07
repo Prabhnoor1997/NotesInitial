@@ -1,0 +1,13 @@
+<div  class="noteGridContainer" >
+    <div  class="grid-row" >
+        <mat-card *ngFor="let value of notes; let i = index" (click)=getNotes(value) class="grid-item"  fxLayout="column" fxLayoutAlign="space-between stretch">
+              <div>
+                <mat-card-title>{{value.title}}</mat-card-title>
+                <mat-card-content >{{value.description}}</mat-card-content>
+              </div>
+                <mat-card-footer><app-icon-bar>[noteid]={{value}}</app-icon-bar></mat-card-footer>
+              </mat-card>
+                
+      </div>
+
+</div>

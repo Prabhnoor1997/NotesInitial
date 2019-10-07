@@ -1,0 +1,29 @@
+
+<div fxLayout="row" fxLayoutAlign="space-between center">
+
+    <div class="icons" >
+      
+        <button mat-icon-button [matMenuTriggerFor]="color">   <mat-icon>color_lens</mat-icon>     </button>
+        <button mat-icon-button>  <mat-icon>archive</mat-icon>      </button>
+        <button mat-icon-button>  <mat-icon>add_alert</mat-icon>     </button>
+        <!-- <button mat-icon-button (click)=saveNotes()> <mat-icon >save      </mat-icon> </button> -->
+        <button mat-icon-button [matMenuTriggerFor]="appMenu">  <mat-icon>more_vert</mat-icon></button>
+                
+    </div>
+        
+</div>
+
+<mat-menu #appMenu="matMenu">
+        <button mat-menu-item>Settings</button>
+        <button mat-menu-item (click)=deleteNote()>Delete Note</button>
+</mat-menu>
+      
+<mat-menu #color="matMenu"  >
+    <div class="colorHolder" fxFlex="100">
+            <button  class="dot"*ngFor="let color of colors; let i = index"
+               [ngStyle]="{background: color}" (click)=colorElement(color)></button>
+    </div>
+        
+        
+</mat-menu>
+

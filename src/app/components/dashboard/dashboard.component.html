@@ -1,0 +1,63 @@
+<mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
+
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <a mat-button width="20px" (click)="drawer.toggle()" > <mat-icon>list</mat-icon>  </a>
+      
+      <img src="../../assets/images/output-onlinepngtools.png" width="200px"  fxHide.lt-md="true" >  
+    
+  
+    </div>
+
+    <input type="search" class="mat-elevation-z2" width="500px" fxHide.lt-md="true">
+
+    <div  fxLayout="row" fxLayoutAlign="space-between center">
+
+      <!-- The following menu items will be hidden on both SM and XS screen sizes -->
+
+      <a href="#" mat-button fxHide.md="true"> <mat-icon >search</mat-icon></a>
+      <a href="#" mat-button> <mat-icon>turned_in</mat-icon></a>
+
+      <a href="#" mat-button> <mat-icon>build</mat-icon></a>
+      <a href="#" mat-button> <mat-icon>settings</mat-icon></a>
+      
+      
+      
+
+    </div>
+
+    
+
+  </mat-toolbar>
+  <mat-divider></mat-divider>
+
+  <mat-drawer-container  class="sideNav-container"  >
+      <mat-drawer #drawer mode="side" class="drawer"  >
+        <mat-nav-list fxLayout="column" > 
+            <button mat-button>
+              <div fxLayout="row"  >
+                  <mat-icon>notifications</mat-icon>
+                <a >  Notes</a>
+                
+              </div>
+              </button >
+            <button mat-button>
+              <div fxLayout="row" >
+                  <mat-icon>turned_in</mat-icon>
+                <a>  Reminder</a>
+                
+              </div></button>
+            <hr width="100%">
+            <button mat-button>Click me!   <mat-icon>view_headline</mat-icon> </button>
+            <hr width="100%">
+            <button mat-button>Trash<mat-icon>view_headline</mat-icon> </button>
+
+        </mat-nav-list>
+
+        
+      </mat-drawer>
+      <mat-drawer-content fxLayout="column" fxLayoutAlign="start center" >
+          
+        <router-outlet></router-outlet>
+        </mat-drawer-content>
+        
+    </mat-drawer-container>

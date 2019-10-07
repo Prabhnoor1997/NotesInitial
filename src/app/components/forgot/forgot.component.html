@@ -1,0 +1,46 @@
+<div class="bod" fxFlex="100" fxLayoutAlign="center center">
+
+
+  <mat-card fxFlex="40" fxFlex.xs="100" class="loginContainer" fxLayout="column" >
+
+    <mat-card-content class="fundooNotesLogo" fxFlex="100" fxLayoutAlign="space-around stretch">
+
+      <img src="../../assets/images/output-onlinepngtools.png" width="275">
+
+    </mat-card-content>
+    <mat-toolbar class="title">
+      <span>Forgot</span>
+    </mat-toolbar>
+
+
+    <mat-card-content>
+      <form class="my-form">
+        
+
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput name="email" [formControl]="email" required>
+          <mat-error *ngIf="email.invalid"> {{getEmailInvalidMessage()}}</mat-error>
+        </mat-form-field>
+      
+
+      </form>
+
+      <mat-card-actions fxLayout="row" fxLayoutAlign="space-around center">
+        <button mat-raised-button [disabled]=email.invalid (click)="forgot(email.value)">Next</button>
+        <button mat-raised-button [routerLink]="['/login']">Login</button>
+
+      </mat-card-actions>
+
+    </mat-card-content>
+
+
+
+  </mat-card>
+
+
+
+
+
+
+</div>
