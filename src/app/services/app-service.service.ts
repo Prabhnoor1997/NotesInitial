@@ -19,7 +19,7 @@ export class AppServiceService {
     let httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': localStorage.getItem('token')
+          'Authorization': localStorage.getItem('id')
         })
       };
       return this.http.post(this.link + url,this.getEncodData(user), httpOptions );
@@ -35,6 +35,22 @@ getEncodData(toConvert) {
     }
     return formBody.join('&');
   }
+  
+  uploadPic(data){
+    let url='user/uploadProfileImage';
+    //this.auth=false;
+    return this.postCallPic(data,url);
 
+  }
+  postCallPic(data,url){
+   let  httpOptionsPic = {
+      headers: new HttpHeaders({
+        // 'Content-type': 'application/json',
+        'Authorization': localStorage.getItem('id')
+      })
+    };
+    return this.http.post(this.link+url, data, httpOptionsPic);
+
+  }
 }
 

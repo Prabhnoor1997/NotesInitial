@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  link:'http://fundoonotes.incubation.bridgelabz.com/api/'
+  link:'http://fundoonotes.incubation.bridgelabz.com/api/',
+  linkPic:"http://fundoonotes.incubation.bridgelabz.com/"
 };
 
 /*

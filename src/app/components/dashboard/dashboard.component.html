@@ -4,11 +4,19 @@
       <a mat-button width="20px" (click)="drawer.toggle()" > <mat-icon>list</mat-icon>  </a>
       
       <img src="../../assets/images/output-onlinepngtools.png" width="200px"  fxHide.lt-md="true" >  
-    
-  
+     <mat-card class="searchCard" fxFlex="100" fxLayout="row" fxLayoutAlign="space-around start" >
+        <div class="example-full-width" margin-top="20px">
+      
+            <textarea  placeholder="Search...." matInput class="input" [ngStyle]="{background: color}" name="note" [(ngModel)]="note"  cdkTextareaAutosize
+              #autosize="cdkTextareaAutosize" ></textarea>
     </div>
 
-    <input type="search" class="mat-elevation-z2" width="500px" fxHide.lt-md="true">
+    <button mat-icon-button><mat-icon>search</mat-icon></button>
+     </mat-card>
+     
+              </div>
+
+   
 
     <div  fxLayout="row" fxLayoutAlign="space-between center">
 
@@ -18,13 +26,13 @@
       <a href="#" mat-button> <mat-icon>turned_in</mat-icon></a>
 
       <a href="#" mat-button> <mat-icon>build</mat-icon></a>
-      <a href="#" mat-button> <mat-icon>settings</mat-icon></a>
+     <button mat-mini-fab [matMenuTriggerFor]="accountBox">PB</button>
       
       
       
 
     </div>
-
+ 
     
 
   </mat-toolbar>
@@ -34,23 +42,53 @@
       <mat-drawer #drawer mode="side" class="drawer"  >
         <mat-nav-list fxLayout="column" > 
             <button mat-button>
-              <div fxLayout="row"  >
-                  <mat-icon>notifications</mat-icon>
-                <a >  Notes</a>
+              <div fxLayout="row"  (click)=navigateToNotes()>
+                  <mat-icon class="icons">notifications</mat-icon>
+                <a > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Notes</a>
                 
               </div>
               </button >
             <button mat-button>
               <div fxLayout="row" >
-                  <mat-icon>turned_in</mat-icon>
-                <a>  Reminder</a>
+                  <mat-icon class="icons">turned_in</mat-icon>
+                <a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Reminder</a>
                 
               </div></button>
             <hr width="100%">
-            <button mat-button>Click me!   <mat-icon>view_headline</mat-icon> </button>
-            <hr width="100%">
-            <button mat-button>Trash<mat-icon>view_headline</mat-icon> </button>
+             
+                  <button mat-button  *ngFor="let label of labels" >
+                  <div fxLayout="row" >
+                      <mat-icon class="icons">turned_in</mat-icon>
+                    <a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{label.label}}</a>
 
+              </div>
+              </button>
+
+              <button mat-button (click)="openLabelEditBox()">
+              <div fxLayout="row" >
+                  <mat-icon class="icons">edit</mat-icon>
+                <a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Edit Label</a>
+                
+              </div></button>
+              
+            <hr width="100%">
+            <button mat-button>
+              <div fxLayout="row"  (click)=navigateArchive()>
+                <mat-icon class="icons">archive</mat-icon>
+              <a > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Archive</a>
+              
+            </div>
+            </button>
+          
+            <hr width="100%">
+            <button mat-button>
+              <div fxLayout="row"  (click)=navigateTrash()>
+                <mat-icon class="icons">delete_sweep</mat-icon>
+              <a >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&ensp;Trash</a>
+              
+            </div>
+            </button>
+            
         </mat-nav-list>
 
         
@@ -61,3 +99,26 @@
         </mat-drawer-content>
         
     </mat-drawer-container>
+
+
+
+
+    <mat-menu #accountBox="matMenu" class="logoutBox" >
+      <div fxLayout="row">
+        <div class="ImageContainer">
+         
+          <img [src]="getUrl()" class="imageHolder" (click)="openImageSetter()"  >
+        </div>
+        <div class="userInfo">
+          <div class="email">parryvelly@gmail.com</div>
+          <div class="Name">Prabhnoor SIngh</div>
+        </div>
+      </div>
+      
+      <div class="accountBox" fxLayout="row" fxLayoutAlign="space-around center">
+              <button mat-raised-button>Add Account</button>
+              <button mat-raised-button (click)="logOut()">Logout</button>
+      </div>
+          
+          
+  </mat-menu>

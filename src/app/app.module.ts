@@ -21,7 +21,14 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NotesComponent } from './components/notes/notes.component';
 import { DisplayComponent } from './components/display/display.component';
 import { DataService } from './services/data.service';
-import { AuthGuard} from './auth.guard'
+import { AuthGuard} from './auth.guard';
+import { TrashComponent } from './components/trash/trash.component';
+import { ArchiveComponent } from './components/archive/archive.component';
+import { DialogueComponent } from './components/note-edit-box/note-edit-box.component';
+import { ImageSetterComponent } from './components/image-setter/image-setter.component';
+import { LabelEditComponent } from './components/label-edit/label-edit.component'
+import {ImageCropperModule} from 'ngx-image-cropper';
+import { SearchPipe } from './search.pipe'
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,9 +41,16 @@ import { AuthGuard} from './auth.guard'
     IconBarComponent,
     DashboardComponent,
     NotesComponent,
-    DisplayComponent
+    DisplayComponent,
+    TrashComponent,
+    ArchiveComponent,
+    DialogueComponent,
+    ImageSetterComponent,
+    LabelEditComponent,
+    SearchPipe
     
   ],
+  entryComponents : [DialogueComponent,LabelEditComponent,ImageSetterComponent],
   imports: [
     BrowserModule,
     MyMaterialModule,
@@ -45,7 +59,7 @@ import { AuthGuard} from './auth.guard'
     FlexLayoutModule,
     HttpClientModule,
     routing,
-
+    ImageCropperModule
   ],
   providers: [AppServiceService, NotesSerivesService,DataService,AuthGuard ],
   bootstrap: [AppComponent]

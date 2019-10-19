@@ -1,0 +1,28 @@
+<div class="container" fxFlex="100" fxLayout="column" fxLayoutAlign="space-between stretch" [ngStyle]="{background: data.color}">
+
+  <textarea matInput type="text" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+    cdkAutosizeMaxRows="25"class="text"  placeholder="Title" [formControl]="title" value="{{data.title}}" [ngStyle]="{background: data.color}"></textarea>
+
+    <textarea matInput type="text" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+    cdkAutosizeMaxRows="25" class="text" placeholder="Take a Note" [formControl]="description" value="{{data.note}}" [ngStyle]="{background: data.color}"></textarea>
+
+    <div class="footer" fxLayoutAlign="space-between center">
+    <app-icon-bar (eventCarrier)="recieveMessageFromIconTray($event)">[noteId]=data.id </app-icon-bar>
+  <button mat-button (click)=" updateNote()">Close</button>
+</div>
+</div>
+
+
+<!-- 
+<div class="container" fxLayout="column" fxLayoutGap="10px" *ngIf="data.recycle==true">
+  <p >{{data.title}}</p>
+    <p>{{data.description}}</p>
+    <button mat-icon-button [matMenuTriggerFor]="menu" title="More">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" [overlapTrigger]="false">
+        <button mat-menu-item (click)="deleteForever(data.id)">Delete Forever</button>
+      <button mat-menu-item (click)="restoreNote(data.id)">Restore</button>
+    </mat-menu>
+  </div>
+ -->

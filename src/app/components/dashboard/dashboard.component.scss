@@ -1,16 +1,105 @@
 .mat-toolbar {
     background-color: #f8f6f1;
+    z-index: 2;
+    .mat-button{
+      width:50px; 
+    }
+    
+    .searchCard{
+      border:none;
+      min-width:300px;
+      //height: 20px;
+      margin-left: 20%;
+      padding-bottom: 0px;
+      padding-top:5px;
+      padding-right: 10px;
+      padding-left:10px;
+      border-radius:10px;
+  }
+    
+    .example-full-width{
+      width:100%;
+      padding-top:5px;
+      height: 29px;
+
+      .input{
+        border:none;
+        width:90%;
+        min-height: 25px;
+        height: 25px;
+        outline: none;
+    }  
+    .input:active{
+      border:none
+  }
+   
+  }
+ 
+    // .searchbar
+    // {
+    //   width : 40%;
+    //   transform: scaleY(0.65); 
+    //   border-radius: 10px;
+    //   font-size: 20px;
+    //   height: 40%;
+    //   margin-right: 18%;
+      
+    //   .searchtype 
+    //   {
+    //     width : 95%;
+    //     height: 100%;
+    //     outline: none;
+    //     border : none;
+    //     font-size: 18px;
+    //   }
+    //   }
   }
   .sideNav-container {
-    background-color: #f8f6f1;
+    background-color: #ffffff;
     
     height: 100%;
     padding-top: 10px;
     border: none;
   
-    .drawer {
-      background-color: #f3ede3;
-      width: 12%;
-      min-width: 130px;
+    .icons{
+      padding-top: 5px;
     }
+    .drawer {
+      background-color: #fcfaf8;
+      width: 12%;
+      min-width: 220px;
+      
+    }
+    .full-width{
+      width: 100%;
+    }
+}
+@media only screen and (max-width: 540px){
+.sideNav-container{
+  .drawer{
+    min-width:100px;
+    width:150px;
+  }
+}}
+
+::ng-deep.mat-menu-panel.ng-trigger.ng-trigger-transformMenu.ng-tns-c10-1.logoutBox.mat-menu-below.ng-star-inserted.mat-elevation-z2.mat-menu-before {
+  max-width: none;
+}
+.email{
+  text-size-adjust: 10px;
+}
+.ImageContainer{
+ padding:20px;
+ }
+
+.imageHolder{
+  width:100px;
+  height: 100px;
+  border-radius: 80%;
+  
+ 
+}
+.userInfo{
+  margin:auto;
+  padding:10px;
 }

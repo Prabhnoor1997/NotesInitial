@@ -1,0 +1,30 @@
+<div class="upload-box">
+    <div fxLayout="column">
+    <h1>Select profile photo</h1>
+    <!-- <div fxLayout="row" fxLayoutAlign="start center">
+        <h5>Upload photos</h5>
+        <h5>Your photos</h5>
+    </div> -->
+
+    <mat-tab-group>
+        <mat-tab label="Upload photos"> </mat-tab>
+        <mat-tab label="Your photos"> </mat-tab>
+
+      </mat-tab-group>
+</div>
+    <mat-divider></mat-divider>
+
+    <input type="file" (change)="fileChangeEvent($event)">
+    <image-cropper
+    [imageChangedEvent]="imageChangedEvent"
+    [maintainAspectRatio]="true"
+    [aspectRatio]="4 / 3"
+    [resizeToWidth]="128"
+    format="png"
+    (imageCropped)="imageCropped($event)">
+</image-cropper>
+
+
+<button type="button" (click)="onUpload()">upload</button>
+</div>
+

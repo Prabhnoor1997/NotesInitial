@@ -1,0 +1,29 @@
+.noteGridContainer {
+    max-width: 1335px;
+    
+    margin: 0 auto;
+    .grid-row {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+      
+      .grid-item {
+        margin-top: 40px;
+        margin-left: 20px;
+        margin-right:20px;
+        border-radius: 5%;
+        flex-basis: 25%;
+        min-width: 250px;
+        min-height: 180px;
+        //-ms-flex: auto;
+        
+        word-break: break-word;
+        position: relative;
+        padding: 10px;
+        box-sizing: border-box;
+        .mat-card-footer{
+            padding-bottom: 20px;
+        }
+      }
+    }
+  }

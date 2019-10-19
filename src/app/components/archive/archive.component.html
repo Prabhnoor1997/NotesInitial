@@ -1,0 +1,14 @@
+
+<div  class="noteGridContainer" >
+  <div  class="grid-row" >
+      <mat-card *ngFor="let value of notes; let i = index"   class="grid-item"  [ngStyle]="{background: value.color}" fxLayout="column" fxLayoutAlign="space-between stretch">
+            <div >
+              <mat-card-title>{{value.title}}</mat-card-title>
+              <mat-card-content >{{value.description}}</mat-card-content>
+            </div>
+              <mat-card-footer><app-icon-bar (eventCarrier)="recieveMessageFromIconTray($event,value.id)"></app-icon-bar></mat-card-footer>
+            </mat-card>
+              
+    </div>
+
+</div>
