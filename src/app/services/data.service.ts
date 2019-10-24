@@ -6,19 +6,23 @@ import {Events} from '../models/eventModel'
   providedIn: 'root'
 })
 export class DataService {
-
+  event:Events
+  private eventCarrier=new BehaviorSubject('');
   private messageSource = new BehaviorSubject('default message');
-  private colorSource=new BehaviorSubject('');
+  private labelName=new BehaviorSubject('');
+  eventObservable=this.eventCarrier.asObservable();
   currentMessage = this.messageSource.asObservable();
-  colorObservable=this.colorSource.asObservable();
+  labelObservable=this.labelName.asObservable();
   constructor() { }
-  
+  sendEvent(search:string){
+   this.eventCarrier.next(search);
+  }
   changeMessage(message: string) {
     this.messageSource.next(message)
   }
 
-  changeColor(color:string){
-    this.colorSource.next(color);
+  labelNameNext(label:string){
+    this.labelName.next(label);
   }
 
   // getchangedMessage() {

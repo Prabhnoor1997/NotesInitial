@@ -24,13 +24,17 @@
 
       .input{
         border:none;
+        position: absolute;
         width:90%;
-        min-height: 25px;
-        height: 25px;
+        //min-height: 25px;
+        height: 20px;
         outline: none;
     }  
     .input:active{
       border:none
+  }
+  .searchLogo{
+    margin-bottom: 5px;
   }
    
   }
@@ -82,9 +86,8 @@
   }
 }}
 
-::ng-deep.mat-menu-panel.ng-trigger.ng-trigger-transformMenu.ng-tns-c10-1.logoutBox.mat-menu-below.ng-star-inserted.mat-elevation-z2.mat-menu-before {
-  max-width: none;
-}
+::ng-deep.mat-menu-panel.ng-trigger.ng-trigger-transformMenu.ng-tns-c11-1.logoutBox.mat-menu-before.mat-menu-below.mat-elevation-z2.ng-star-inserted
+{max-width: none;}
 .email{
   text-size-adjust: 10px;
 }

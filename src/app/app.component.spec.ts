@@ -1,12 +1,15 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-
+import {RouterTestingModule} from '@angular/router/testing'
+import {HttpClientTestingModule} from '@angular/common/http/testing'
+import { MyMaterialModule } from './material/material.module';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent
       ],
+      imports:[RouterTestingModule,HttpClientTestingModule,MyMaterialModule,HttpClientTestingModule]
     }).compileComponents();
   }));
 
@@ -22,10 +25,5 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('fundooNew');
   });
 
-  it('should render title in a h1 tag', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to fundooNew!');
-  });
+
 });

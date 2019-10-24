@@ -11,6 +11,7 @@ p {
 
 
 .noteGridContainer {
+  min-width:500px;
     max-width: 900px;
     display: flex;
     flex-wrap: wrap;
@@ -27,6 +28,7 @@ p {
         margin-left: 10px;
         margin-right:10px;
         border-radius: 5%;
+        //min-width:150px;
         //flex-basis: 25%;
         width:140px;
         //max-width:100px;

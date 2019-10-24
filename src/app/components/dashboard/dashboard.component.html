@@ -7,11 +7,11 @@
      <mat-card class="searchCard" fxFlex="100" fxLayout="row" fxLayoutAlign="space-around start" >
         <div class="example-full-width" margin-top="20px">
       
-            <textarea  placeholder="Search...." matInput class="input" [ngStyle]="{background: color}" name="note" [(ngModel)]="note"  cdkTextareaAutosize
-              #autosize="cdkTextareaAutosize" ></textarea>
+            <input  type="search" placeholder="Search...." matInput class="input"    
+             (keyup)="searchNote($event)" (focus)="focusInSearch()" >
     </div>
 
-    <button mat-icon-button><mat-icon>search</mat-icon></button>
+   
      </mat-card>
      
               </div>
@@ -22,10 +22,7 @@
 
       <!-- The following menu items will be hidden on both SM and XS screen sizes -->
 
-      <a href="#" mat-button fxHide.md="true"> <mat-icon >search</mat-icon></a>
-      <a href="#" mat-button> <mat-icon>turned_in</mat-icon></a>
-
-      <a href="#" mat-button> <mat-icon>build</mat-icon></a>
+      
      <button mat-mini-fab [matMenuTriggerFor]="accountBox">PB</button>
       
       
@@ -57,7 +54,7 @@
             <hr width="100%">
              
                   <button mat-button  *ngFor="let label of labels" >
-                  <div fxLayout="row" >
+                  <div fxLayout="row" (click)="navigateToLabel(label.label)" >
                       <mat-icon class="icons">turned_in</mat-icon>
                     <a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{label.label}}</a>
 

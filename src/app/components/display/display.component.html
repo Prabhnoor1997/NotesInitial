@@ -1,3 +1,6 @@
+
+<div *ngIf="componentNotesOrlabels()">
+  
 <p >Pinned</p>
 <div  class="noteGridContainer" >
     
@@ -89,5 +92,53 @@
             </mat-card>
               
    
+
+</div>
+</div>
+<div *ngIf="componentSearch()">
+    <div  class="noteGridContainer" >
+ 
+        <mat-card *ngFor="let value of searchedNotes; let i = index"
+         (mouseover)="hoverIn(value)"  (mouseout)="hoverOut()"  
+          class="grid-item"  [ngStyle]="{background: value.color}"
+           fxLayout="column" fxLayoutAlign="space-between stretch">
+      <div >
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-card-title (click)=openDialog(value)><b class="title">{{value.title}}</b></mat-card-title>
+            <img src="{{pinAssign(value)}}" (click)="togglePin(value)" class="logo" width="20px" height="20px">
+        </div>
+        
+        <mat-card-content (click)=openDialog(value)>{{value.description}}</mat-card-content>
+      </div>
+      <div class="labelsContainer" fxLayout="row" >
+
+              
+          <div *ngFor="let label of value.noteLabels" (mouseover)="hoverOnLabel(label)"  (mouseout)="hoverOutLabel()">
+              
+           
+              
+          <button mat-mini-fab class="labelButton" color="" [ngStyle]="{background: value.color}"   >
+                  <div fxLayout="row">
+                      <a class="labelText">{{label.label}}</a>  
+                      <div [style.visibility]="labelHoverCheck(label,value) ? 'visible' : 'hidden'"   >
+                          <img  src="../../../assets/icon/clear-24px.svg" (click)="removeLabel(label,value)" class="clear" width="10px" height="10px">
+
+                      </div>
+                  </div> 
+                   
+          </button>
+            
+          </div>
+       
+
+
+    
+  </div>  
+        <mat-card-footer  ><app-icon-bar [style.visibility]="isFootVisible(value) ? 'visible' : 'hidden'"   (eventCarrier)="recieveMessageFromIconTray($event,value.id)" ></app-icon-bar></mat-card-footer>
+      </mat-card>
+        
+
+
+</div>
 
 </div>

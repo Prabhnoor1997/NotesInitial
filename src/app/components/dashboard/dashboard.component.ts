@@ -8,6 +8,7 @@ import { LabelEditComponent } from '../label-edit/label-edit.component';
 import { ImageSetterComponent } from '../image-setter/image-setter.component';
 import {environment} from '../../../environments/environment'
 import {routing} from '../../app.routing'
+
 @Component({ 
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -17,12 +18,12 @@ export class DashboardComponent implements OnInit {
   message:string;
   labels:Labels[];
   picUrl:any;
-  constructor(private dialog:MatDialog,private data: DataService,private routing:Router,private noteService:NotesSerivesService) {
-    console.log("dashboard")
+  constructor(private dialog:MatDialog,private dataService: DataService,private routing:Router,private noteService:NotesSerivesService) {
+    
    }
 
   ngOnInit() {
-    this.data.currentMessage.subscribe(message => this.message = message)
+    this.dataService.currentMessage.subscribe(message => this.message = message)
     this.navigateToNotes();
     this.getLabels();
 
@@ -36,8 +37,11 @@ navigateToNotes(){
   this.routing.navigate(['notes'])
 
 }
+navigateToSearch(){
+  this.routing.navigate(['search'])
+}
 getUrl(){
-  console.log(this.picUrl);
+  //console.log(this.picUrl);
   return(this.picUrl)
 }
 navigateTrash(){ 
@@ -78,5 +82,26 @@ openImageSetter(){
 logOut(){
   localStorage.removeItem('id')
   this.routing.navigate(['login']);
+}
+
+
+searchNote(event){
+  //console.log(event);
+  this.dataService.sendEvent(event.target.value);
+  
+}
+focusInSearch(){
+this.dataService.changeMessage("searchIn");
+this.navigateToSearch();
+}
+focusOutSearch(){
+  this.dataService.changeMessage("searchOut");
+  this.navigateToNotes();
+}
+navigateToLabel(label){
+  //console.log(label);
+  
+  this.dataService.labelNameNext(label)
+  this.routing.navigate(['labels/'+label])
 }
 }

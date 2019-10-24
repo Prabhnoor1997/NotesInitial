@@ -12,6 +12,8 @@ import { NotesComponent } from './components/notes/notes.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import {TrashComponent} from './components/trash/trash.component'
 import {ArchiveComponent} from './components/archive/archive.component'
+import {SearchComponent} from './components/search/search.component'
+import {LabelComponent} from './components/label/label.component'
 //import { AuthGuard } from './_guards';
 
 const appRoutes: Routes = [
@@ -22,13 +24,15 @@ const appRoutes: Routes = [
         {path: 'notes',component:NotesComponent},
         {path: 'trash',component:TrashComponent},
         {path: 'archive',component:ArchiveComponent},
+        {path: 'search',component:SearchComponent},
+        {path: 'labels/:labelName',component:LabelComponent}
 
         //{path:'trash',component:},
     ] },
     {path: 'forgot', component: ForgotComponent},
     {path : 'resetpassword/:id', component:ResetComponent},
     
-    // { path: '**', redirectTo: 'login' }
+     { path: '**', redirectTo: 'login' }
 ];
 
 

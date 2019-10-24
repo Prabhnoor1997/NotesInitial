@@ -1,5 +1,5 @@
 <div  fxLayout="column" fxLayoutAlign="space-around center" >
   <app-note-field ></app-note-field>
-<app-display></app-display>
+<app-display [pinnedNotes]="pinnedNotes" [unPinned]="unPinned" [component]="component" (eventCarrierDisplay)="recieveMessageFromDisplay($event)" ></app-display>
 </div>
  

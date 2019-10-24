@@ -1,18 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { TrashComponent } from './trash.component';
-import { MyMaterialModule } from 'src/app/material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { SearchComponent } from './search.component';
+import { DisplayComponent } from '../display/display.component';
+import { MyMaterialModule } from 'src/app/material/material.module';
+import { IconBarComponent } from '../icon-bar/icon-bar.component';
 import { NotesSerivesService } from 'src/app/services/notes-serives.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-describe('TrashComponent', () => {
-  let component: TrashComponent;
-  let fixture: ComponentFixture<TrashComponent>;
+describe('SearchComponent', () => {
+  let component: SearchComponent;
+  let fixture: ComponentFixture<SearchComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TrashComponent ],
+      declarations: [ SearchComponent ,DisplayComponent,IconBarComponent],
       imports:[MyMaterialModule ,FormsModule, ReactiveFormsModule ,HttpClientTestingModule
 
       ],
@@ -22,7 +23,7 @@ describe('TrashComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TrashComponent);
+    fixture = TestBed.createComponent(SearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

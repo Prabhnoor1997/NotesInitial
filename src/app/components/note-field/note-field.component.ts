@@ -68,7 +68,7 @@ export class NoteFieldComponent implements OnInit {
   //   }
   // }
   newMessage() {
-    this.dataService.changeMessage("Note Added")
+    this.dataService.changeMessage("Note added")
   }
   pinNote(){
   

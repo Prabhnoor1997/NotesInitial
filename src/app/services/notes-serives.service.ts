@@ -47,7 +47,7 @@ export class NotesSerivesService {
         'Authorization': localStorage.getItem('id')
       })
     };
-    console.log(note);
+    //console.log(note);
     return this.http.post(this.link + this.serviceUrl + url, note, httpOptions);
 
 
@@ -139,6 +139,18 @@ export class NotesSerivesService {
   
   
   
+  }
+  allNotesList(){
+    return(this.getRequest('getNotesList'))
+  }
+
+  getNotesForLabel(label){
+    let url="getNotesListByLabel/"+label;
+    let data={
+      "labelName":label
+    }
+    
+    return this.postJson(url,data)
   }
   }
   

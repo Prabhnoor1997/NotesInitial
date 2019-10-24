@@ -64,7 +64,7 @@ export class DialogueComponent implements OnInit {
       this.response = response;
       console.log("the result is ", this.response);
     });
-    this.dataSvc.changeMessage("message from dialog");
+    this.dataSvc.changeMessage("Note Edited");
   }
 
   restoreNote(noteid)

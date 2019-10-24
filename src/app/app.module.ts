@@ -28,7 +28,11 @@ import { DialogueComponent } from './components/note-edit-box/note-edit-box.comp
 import { ImageSetterComponent } from './components/image-setter/image-setter.component';
 import { LabelEditComponent } from './components/label-edit/label-edit.component'
 import {ImageCropperModule} from 'ngx-image-cropper';
-import { SearchPipe } from './search.pipe'
+import { SearchPipe } from './search.pipe';
+import { SearchComponent } from './components/search/search.component';
+import { LabelComponent } from './components/label/label.component';
+import { CardComponent } from './components/card/card.component';
+import { ReminderComponent } from './components/reminder/reminder.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +51,11 @@ import { SearchPipe } from './search.pipe'
     DialogueComponent,
     ImageSetterComponent,
     LabelEditComponent,
-    SearchPipe
+    SearchPipe,
+    SearchComponent,
+    LabelComponent,
+    CardComponent,
+    ReminderComponent
     
   ],
   entryComponents : [DialogueComponent,LabelEditComponent,ImageSetterComponent],

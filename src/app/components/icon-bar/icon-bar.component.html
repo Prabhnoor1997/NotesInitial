@@ -3,11 +3,18 @@
 
     <div class="icons" >
       {{visibility}}
-        <button mat-icon-button [matMenuTriggerFor]="color">   <mat-icon>color_lens</mat-icon>     </button>
-        <button mat-icon-button (click)=archive()>  <mat-icon>archive</mat-icon>      </button>
-        <button mat-icon-button>  <mat-icon>add_alert</mat-icon>     </button>
-        <!-- <button mat-icon-button (click)=saveNotes()> <mat-icon >save      </mat-icon> </button> -->
-        <button mat-icon-button [matMenuTriggerFor]="appMenu">  <mat-icon>more_vert</mat-icon></button>
+        <button mat-icon-button [matMenuTriggerFor]="color">  
+           <mat-icon>color_lens</mat-icon>     </button>
+        <button mat-icon-button (click)=archive()> 
+           <mat-icon>archive</mat-icon>      </button>
+            <app-reminder [note]="note"></app-reminder>
+               
+        
+        <!-- <button mat-icon-button (click)=saveNotes()> <mat-icon >save      
+
+        </mat-icon> </button> -->
+        <button mat-icon-button [matMenuTriggerFor]="appMenu">  
+          <mat-icon>more_vert</mat-icon></button>
                 
     </div>
         
@@ -22,8 +29,10 @@
       
 <mat-menu #color="matMenu" >
     <div class="colorHolder" fxFlex="100">
-            <button mat-mini-fab class="dot" *ngFor="let color of colors; let i = index"
-               [ngStyle]="{background: color}" (click)=colorElement(color) ></button>
+            <button mat-mini-fab class="dot"
+             *ngFor="let color of colors; let i = index"
+               [ngStyle]="{background: color}" 
+               (click)=colorElement(color) ></button>
     </div>
         
         
@@ -31,12 +40,17 @@
 
 <mat-menu #addLAbel="matMenu" fxLayout="column" class="labelMenu" >
     <div fxLayout="row" class="menu">
-        <textarea (click) = "$event.stopPropagation()" class="input" matInput placeholder="Add a label" name="newLabel" [(ngModel)]="newLabel"></textarea>
-        <button mat-icon-button class="doneIcon" (click)=addLabel() (click) = "$event.stopPropagation()" >  <mat-icon>done</mat-icon>      </button>
+        <textarea (click) = "$event.stopPropagation()" class="input" 
+        matInput placeholder="Add a label" name="newLabel"
+         [(ngModel)]="newLabel"></textarea>
+        <button mat-icon-button class="doneIcon" 
+        (click)=addLabel() (click) = "$event.stopPropagation()" > 
+         <mat-icon>done</mat-icon>      </button>
     </div>
   <div *ngFor="let label of labels;let i = index">
       <section>
-    <mat-checkbox  fxLayout="column" fxLayoutAlign="space-between start" class="labels" 
+    <mat-checkbox  fxLayout="column" fxLayoutAlign="space-between start" 
+    class="labels" 
     (click) = "$event.stopPropagation(); labelAddOrRemove(label)" 
     [(formControl)]="labelCheck" 
     >{{label.label}}</mat-checkbox>

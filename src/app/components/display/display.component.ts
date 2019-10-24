@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Input,EventEmitter,Output} from '@angular/core';
 import {NotesSerivesService} from '../../services/notes-serives.service';
 import {Notes} from '../../models/notesModel'
 import { DataService } from "../../services/data.service";
@@ -6,7 +6,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {DialogueComponent} from '../note-edit-box/note-edit-box.component';
 import {Labels} from '../../models/labels'
 import { throwMatDuplicatedDrawerError } from '@angular/material';
-
+import {Events} from '../../models/eventModel'
 @Component({
   selector: 'app-display',
   templateUrl: './display.component.html',
@@ -14,87 +14,70 @@ import { throwMatDuplicatedDrawerError } from '@angular/material';
 })
 export class DisplayComponent implements OnInit {
   public show:boolean = false;
-  public notes:Notes[];
-  public pinnedNotes:Notes[];
-  public unPinned:Notes[];
+  //public notes:Notes[];
+  @Output() eventCarrierDisplay = new EventEmitter<Events>();
+  
   public buttonName:any = 'Show';
   public message:string;
   public noteSelected;
   public dispalyIconTray: string="hidden";
   public hoverDiv:any 
   public hoverLabel:any
+  event:Events;
   text : any = " "
   labels:Labels[];
   isPined:boolean;
   pinnedlogoPath:string="../assets/icon/Pinned.png"
   UnpinnedPath:string="../assets/icon/Unpinned.png"
   pinPath:string="../assets/icon/Unpinned.png";
+  componentName:string="notes"
+  @Input() pinnedNotes:Notes[];
+  @Input() searchedNotes:Notes[];
+  @Input() unPinned:Notes[];
+  @Input() component:string;
   constructor(private noteService: NotesSerivesService,private dataService:DataService,private dialog:MatDialog) {
   
    }
 
   ngOnInit() {
-    this.dataService.currentMessage.subscribe(message => {this.checkNoteAdded()
+    
+    
+    //this.displayNotes();
+    this.dataService.currentMessage.subscribe(message => {
+      if(message=='Note Added')
+      //this.checkNoteAdded();
+      //if(message=="searchIn"){
+       // console.log(this.searchedNotes);
+        //this.componentName=this.component;
+        //this.setPinUnpinNotes(this.searchedNotes);
+
+      //}
+      //if(message=="searchOut")
+      {
+        //console.log(this.searchedNotes)
+        //this.setPinUnpinNotes(this.searchedNotes)
+        //this.componentName="notes";
+      }
      })
      
     
 
   }
 
-  filterTrash(notes){
-    console.log(notes);
-    var newNote = notes.filter(function(note) {
-      return (note.isDeleted==false && note.isArchived==false);
-    });
-    console.log("New note--------"+ newNote)
-    return newNote;
-
-  }
-checkNoteAdded(){
-  console.log("in note add")
-  if(this.message="Note Added")
-    this.displayNotes();
-    this.message="";
-
-
-}
-
-filterPinned(notes){
-  var newNote = notes.filter(function(note) {
-    return (note.isPined==true && note.isArchived==false);
-  });
-  
-  return newNote;
-}
-
-filterUnPinned(notes){
-  var newNote = notes.filter(function(note) {
-    return (note.isPined==false && note.isArchived==false);
-  });
-  
-  return newNote;
-}
-
-
-  displayNotes(){
-    this.noteService.getRequest("getNotesList").subscribe((res:any) =>{
-      this.notes=res.data.data;
-      this.notes=this.filterTrash(this.notes);
-      this.notes.reverse();
-      this.pinnedNotes=this.filterPinned(this.notes);
-      this.unPinned=this.filterUnPinned(this.notes);
-
-      //console.log(this.notes);
-      
-    })
-  }
   getNotes(note) {
       this.noteSelected=note;
       //console.log(this.noteSelected);
         return note;
   }
 
- 
+ displayNotes(){
+  this.event={
+    "purpose":"refresh",
+  }
+
+
+  this.eventCarrierDisplay.emit(this.event)
+ }
 
   recieveMessageFromIconTray($event,id){
     console.log($event,id)
@@ -287,5 +270,25 @@ pinNote(pinedValue,id){
    
   })
 
+}
+componentNotesOrlabels(){
+  //console.log(this.component)
+  if(this.component=="notes" || this.component=="label")
+  {
+    
+      return true
+    }
+  
+  else return false;
+}
+componentSearch(){
+  //console.log("inside search",this.component,this.searchedNotes)
+  if(this.component=="search")
+  {
+     
+      return true
+    }
+  
+  else return false;
 }
 }
