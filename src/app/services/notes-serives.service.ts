@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment'
 import { HttpHeaders } from '@angular/common/http'
+import { HttpService } from '../services/http.service';
 import { throwMatDuplicatedDrawerError } from '@angular/material';
 
 @Injectable()
@@ -11,7 +12,7 @@ export class NotesSerivesService {
 
   serviceUrl = "notes/"
   link = environment.link;
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private httpService:HttpService) {
 
 
   }
@@ -40,7 +41,6 @@ export class NotesSerivesService {
   }
 
   postJson(url: string, note) {
-
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -151,6 +151,32 @@ export class NotesSerivesService {
     }
     
     return this.postJson(url,data)
+  }
+  addUpdateReminder(data){
+    let url="addUpdateReminderNotes";
+
+    return this.postJson(url,data)
+  }
+
+  getReminder(){
+    let url="getReminderNotesList";
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': localStorage.getItem('id')
+      })
+    };
+    return this.http.get(this.link + "notes/"+url, httpOptions);
+  }
+  searchUserList(data) {
+   
+    return this.httpService.postJSON('user/searchUserList', data)
+  }
+  addCollaborator(noteId, data) {
+    return this.httpService.postJSON('notes/' + noteId + '/AddcollaboratorsNotes', data)
+  }
+  removeCollaborator(noteId, collaboratorId) {
+    return this.httpService.encodedPostFormDelete('notes/' + noteId + '/removeCollaboratorsNotes/' + collaboratorId)
   }
   }
   
