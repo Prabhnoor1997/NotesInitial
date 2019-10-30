@@ -49,7 +49,7 @@
 
 <div class="footer" fxLayoutAlign="space-between center" *ngIf="showTit">
     <app-icon-bar (eventCarrier)="recieveMessageFromIconTray($event)" (saveNote)="saveButtonClick($event)"></app-icon-bar>
-    <button mat-button (click)="saveNote()" >Close</button>
+    <button mat-button fxHide.lt-md="true" (click)="saveNote()" >Close</button>
 
   </div>
 </mat-card>

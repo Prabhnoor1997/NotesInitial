@@ -24,7 +24,7 @@
 </div>
 
 <mat-menu #appMenu="matMenu">
-        <button mat-menu-item>Settings</button>
+        <button mat-menu-item (click)=addQuestion()>Add Question</button>
         <button mat-menu-item (click)=deleteNotes()>Delete Note</button>
         <button mat-menu-item [matMenuTriggerFor]="addLAbel">Add Label</button>
         <button mat-menu-item (click)=labelAdd()>CheckList</button>

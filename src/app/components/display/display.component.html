@@ -1,179 +1,232 @@
-
 <div *ngIf="componentNotesOrlabels()">
-  
-<p >Pinned</p>
-<div  class="noteGridContainer" >
-    
-                <mat-card *ngFor="let value of pinnedNotes; let i = index" (mouseover)="hoverIn(value)"  (mouseout)="hoverOut()"  class="grid-item"  [ngStyle]="{background: value.color}" fxLayout="column" fxLayoutAlign="space-between stretch">
-              <div >
+
+    <p>Pinned</p>
+    <div class="noteGridContainer">
+
+        <mat-card *ngFor="let value of pinnedNotes; let i = index" (mouseover)="hoverIn(value)" (mouseout)="hoverOut()"
+            class="grid-item" [ngStyle]="{background: value.color}" fxLayout="column"
+            fxLayoutAlign="space-between stretch">
+            <div>
                 <mat-card-title>
-                  <div  fxLayout="row" fxLayoutAlign="space-between center"></div>
-                  <div fxLayout="row" fxLayoutAlign="space-between start">
-                      <mat-card-title (click)=openDialog(value)><b class="title">{{value.title}}</b></mat-card-title>
-                      <img src="{{pinAssign(value)}}" (click)="togglePin(value)" class="logo" width="20px" height="20px">
-                  </div>
-                   </mat-card-title>
-              </div>
-              
-            
-              <mat-card-content (click)=openDialog(value) >{{value.description}}</mat-card-content>
-              
-              
-              
-              
-               
-              
-              <div class="labelsContainer" fxLayout="row" >
-                  
-                    
-<div *ngIf="value.reminder.length!=0">
-    <button mat-mini-fab class="labelButton"  [ngStyle]="{background: value.color}"   >
-        <div fxLayout="row">
-            <img  src="../../../assets/icon/schedule-24px.svg" class="reminder" width="15px" height="15px">
-            <a class="labelText">{{value.reminder|date:shortdate}}</a>  
-            <div [style.visibility]="isFootVisible(value) ? 'visible' : 'hidden'"     >
-                <img  src="../../../assets/icon/clear-24px.svg" class="tick" (click)="removeReminder(value)" class="clear" width="10px" height="10px">
+                    <div fxLayout="row" fxLayoutAlign="space-between center"></div>
+                    <div fxLayout="row" fxLayoutAlign="space-between start">
+                        <mat-card-title (click)=openDialog(value)><b class="title">{{value.title}}</b></mat-card-title>
+                        <img src="{{pinAssign(value)}}" (click)="togglePin(value)" class="logo" width="20px"
+                            height="20px">
+                    </div>
+                </mat-card-title>
+            </div>
+
+
+            <mat-card-content (click)=openDialog(value)>{{value.description}}</mat-card-content>
+
+
+
+            <div>
+
+
+                <mat-icon *ngFor="let collaborator of value.collaborators" matTooltip="{{collaborator.firstName}}">
+                    person_pin</mat-icon>
+
 
             </div>
-        </div> 
-         
-</button> 
-</div>
 
-                      <div *ngFor="let label of value.noteLabels" (mouseover)="hoverOnLabel(label)"  (mouseout)="hoverOutLabel()">
-                          
-                       
-                          
-                      <button mat-mini-fab class="labelButton"[ngStyle]="{background: value.color}"   >
-                              <div fxLayout="row">
-                                  <a class="labelText">{{label.label}}</a>  
-                                  <div [style.visibility]="labelHoverCheck(label,value) ? 'visible' : 'hidden'"   >
-                                      <img  src="../../../assets/icon/clear-24px.svg" class="tick" (click)="removeLabel(label,value)" class="clear" width="10px" height="10px">
-          
-                                  </div>
-                              </div> 
-                               
-                      </button>
-                        
-                      </div>
 
-                      
-                   
+            <div class="labelsContainer" fxLayout="row">
 
-           
-                
-              </div>  
-              
-              <mat-card-footer > <app-icon-bar  [style.visibility]="isFootVisible(value) ? 'visible' : 'hidden'"  
-                (eventCarrier)="recieveMessageFromIconTray($event,value.id)" [note]="value" >
-              </app-icon-bar></mat-card-footer>
-              </mat-card>
-              
 
-</div>
-<p>Non-pinned</p>
-<div  class="noteGridContainer" >
- 
-              <mat-card *ngFor="let value of unPinned; let i = index"
-               (mouseover)="hoverIn(value)"  (mouseout)="hoverOut()"  
-                class="grid-item"  [ngStyle]="{background: value.color}"
-                 fxLayout="column" fxLayoutAlign="space-between stretch">
-            <div >
-              <div fxLayout="row" fxLayoutAlign="space-between center">
-                  <mat-card-title (click)=openDialog(value)><b class="title">{{value.title}}</b></mat-card-title>
-                  <img src="{{pinAssign(value)}}" (click)="togglePin(value)" class="logo" width="20px" height="20px">
-              </div>
-              
-              <mat-card-content (click)=openDialog(value)>{{value.description}}</mat-card-content>
-            </div>
-            <div class="labelsContainer" fxLayout="row" >
                 <div *ngIf="value.reminder.length!=0">
-                    <button mat-mini-fab class="labelButton"  [ngStyle]="{background: value.color}"   >
+                    <button mat-mini-fab class="labelButton" [ngStyle]="{background: value.color}">
                         <div fxLayout="row">
-                            <img  src="../../../assets/icon/schedule-24px.svg" class="reminder" width="15px" height="15px">
-                            <a class="labelText">{{value.reminder|date:shortdate}}</a>  
-                            <div [style.visibility]="isFootVisible(value) ? 'visible' : 'hidden'"     >
-                                <img  src="../../../assets/icon/clear-24px.svg" class="tick" (click)="removeReminder(value)" class="clear" width="10px" height="10px">
-                
+                            <img src="../../../assets/icon/schedule-24px.svg" class="reminder" width="15px"
+                                height="15px">
+                            <a class="labelText">{{value.reminder|date:shortdate}}</a>
+                            <div [style.visibility]="isFootVisible(value) ? 'visible' : 'hidden'">
+                                <img src="../../../assets/icon/clear-24px.svg" class="tick"
+                                    (click)="removeReminder(value)" class="clear" width="10px" height="10px">
+
                             </div>
-                        </div> 
-                         
-                </button> 
+                        </div>
+
+                    </button>
                 </div>
-                    
-                <div *ngFor="let label of value.noteLabels" (mouseover)="hoverOnLabel(label)"  (mouseout)="hoverOutLabel()">
-                    
-                 
-                    
-                <button mat-mini-fab class="labelButton" color="" [ngStyle]="{background: value.color}"   >
+
+                <div *ngFor="let label of value.noteLabels" (mouseover)="hoverOnLabel(label)"
+                    (mouseout)="hoverOutLabel()">
+
+
+
+                    <button mat-mini-fab class="labelButton" [ngStyle]="{background: value.color}">
                         <div fxLayout="row">
-                            <a class="labelText">{{label.label}}</a>  
-                            <div [style.visibility]="labelHoverCheck(label,value) ? 'visible' : 'hidden'"   >
-                                <img  src="../../../assets/icon/clear-24px.svg" (click)="removeLabel(label,value)" class="clear" width="10px" height="10px">
-    
+                            <a class="labelText">{{label.label}}</a>
+                            <div [style.visibility]="labelHoverCheck(label,value) ? 'visible' : 'hidden'">
+                                <img src="../../../assets/icon/clear-24px.svg" class="tick"
+                                    (click)="removeLabel(label,value)" class="clear" width="10px" height="10px">
+
                             </div>
-                        </div> 
-                         
+                        </div>
+
+                    </button>
+
+                </div>
+
+
+
+
+
+
+            </div>
+
+            <mat-card-footer>
+                <app-icon-bar [style.visibility]="isFootVisible(value) ? 'visible' : 'hidden'"
+                    (eventCarrier)="recieveMessageFromIconTray($event,value.id)" [note]="value">
+                </app-icon-bar>
+            </mat-card-footer>
+        </mat-card>
+
+
+    </div>
+    <p>Non-pinned</p>
+    <div class="noteGridContainer">
+
+        <mat-card *ngFor="let value of unPinned; let i = index" (mouseover)="hoverIn(value)" (mouseout)="hoverOut()"
+        class="grid-item" [ngStyle]="{background: value.color}" fxLayout="column"
+        fxLayoutAlign="space-between stretch">
+        <div>
+            <mat-card-title>
+                <div fxLayout="row" fxLayoutAlign="space-between center"></div>
+                <div fxLayout="row" fxLayoutAlign="space-between start">
+                    <mat-card-title (click)=openDialog(value)><b class="title">{{value.title}}</b></mat-card-title>
+                    <img src="{{pinAssign(value)}}" (click)="togglePin(value)" class="logo" width="20px"
+                        height="20px">
+                </div>
+            </mat-card-title>
+        </div>
+
+
+        <mat-card-content (click)=openDialog(value)>{{value.description}}</mat-card-content>
+
+
+
+        <div>
+
+
+            <mat-icon *ngFor="let collaborator of value.collaborators" matTooltip="{{collaborator.firstName}}">
+                person_pin</mat-icon>
+
+
+        </div>
+
+
+        <div class="labelsContainer" fxLayout="row">
+
+
+            <div *ngIf="value.reminder.length!=0">
+                <button mat-mini-fab class="labelButton" [ngStyle]="{background: value.color}">
+                    <div fxLayout="row">
+                        <img src="../../../assets/icon/schedule-24px.svg" class="reminder" width="15px"
+                            height="15px">
+                        <a class="labelText">{{value.reminder|date:shortdate}}</a>
+                        <div [style.visibility]="isFootVisible(value) ? 'visible' : 'hidden'">
+                            <img src="../../../assets/icon/clear-24px.svg" class="tick"
+                                (click)="removeReminder(value)" class="clear" width="10px" height="10px">
+
+                        </div>
+                    </div>
+
                 </button>
-                  
-                </div>
-             
+            </div>
 
-     
-          
-        </div>  
-              <mat-card-footer  ><app-icon-bar [style.visibility]="isFootVisible(value) ? 'visible' : 'hidden'" 
-                  (eventCarrier)="recieveMessageFromIconTray($event,value.id)" [note]="value"></app-icon-bar></mat-card-footer>
-            </mat-card>
-              
-   
+            <div *ngFor="let label of value.noteLabels" (mouseover)="hoverOnLabel(label)"
+                (mouseout)="hoverOutLabel()">
 
-</div>
+
+
+                <button mat-mini-fab class="labelButton" [ngStyle]="{background: value.color}">
+                    <div fxLayout="row">
+                        <a class="labelText">{{label.label}}</a>
+                        <div [style.visibility]="labelHoverCheck(label,value) ? 'visible' : 'hidden'">
+                            <img src="../../../assets/icon/clear-24px.svg" class="tick"
+                                (click)="removeLabel(label,value)" class="clear" width="10px" height="10px">
+
+                        </div>
+                    </div>
+
+                </button>
+
+            </div>
+
+
+
+
+
+
+        </div>
+
+        <mat-card-footer>
+            <app-icon-bar [style.visibility]="isFootVisible(value) ? 'visible' : 'hidden'"
+                (eventCarrier)="recieveMessageFromIconTray($event,value.id)" [note]="value">
+            </app-icon-bar>
+        </mat-card-footer>
+    </mat-card>
+
+
+    </div>
 </div>
 <div *ngIf="componentSearch()">
-    <div  class="noteGridContainer" >
- 
-        <mat-card *ngFor="let value of searchedNotes; let i = index"
-         (mouseover)="hoverIn(value)"  (mouseout)="hoverOut()"  
-          class="grid-item"  [ngStyle]="{background: value.color}"
-           fxLayout="column" fxLayoutAlign="space-between stretch">
-      <div >
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-            <mat-card-title (click)=openDialog(value)><b class="title">{{value.title}}</b></mat-card-title>
-            <img src="{{pinAssign(value)}}" (click)="togglePin(value)" class="logo" width="20px" height="20px">
-        </div>
-        
-        <mat-card-content (click)=openDialog(value)>{{value.description}}</mat-card-content>
-      </div>
-      <div class="labelsContainer" fxLayout="row" >
+    <div class="noteGridContainer">
 
-              
-          <div *ngFor="let label of value.noteLabels" (mouseover)="hoverOnLabel(label)"  (mouseout)="hoverOutLabel()">
-              
-           
-              
-          <button mat-mini-fab class="labelButton" color="" [ngStyle]="{background: value.color}"   >
-                  <div fxLayout="row">
-                      <a class="labelText">{{label.label}}</a>  
-                      <div [style.visibility]="labelHoverCheck(label,value) ? 'visible' : 'hidden'"   >
-                          <img  src="../../../assets/icon/clear-24px.svg" (click)="removeLabel(label,value)" class="clear" width="10px" height="10px">
+        <mat-card *ngFor="let value of searchedNotes; let i = index" (mouseover)="hoverIn(value)"
+            (mouseout)="hoverOut()" class="grid-item" [ngStyle]="{background: value.color}" fxLayout="column"
+            fxLayoutAlign="space-between stretch">
+            <div>
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <mat-card-title (click)=openDialog(value)><b class="title">{{value.title}}</b></mat-card-title>
+                    <img src="{{pinAssign(value)}}" (click)="togglePin(value)" class="logo" width="20px" height="20px">
+                </div>
 
-                      </div>
-                  </div> 
-                   
-          </button>
-            
-          </div>
-       
+                <mat-card-content (click)=openDialog(value)>{{value.description}}</mat-card-content>
+            </div>
+            <div>
+                <mat-icon *ngFor="let collaborator of value.collaborators" matTooltip="{{collaborator.firstName}}">
+                    person_pin</mat-icon>
+            </div>
 
 
-    
-  </div>  
-        <mat-card-footer  ><app-icon-bar [style.visibility]="isFootVisible(value) ? 'visible' : 'hidden'"   (eventCarrier)="recieveMessageFromIconTray($event,value.id)" ></app-icon-bar></mat-card-footer>
-      </mat-card>
-        
+            <div class="labelsContainer" fxLayout="row">
 
 
-</div>
+                <div *ngFor="let label of value.noteLabels" (mouseover)="hoverOnLabel(label)"
+                    (mouseout)="hoverOutLabel()">
+
+
+
+                    <button mat-mini-fab class="labelButton" color="" [ngStyle]="{background: value.color}">
+                        <div fxLayout="row">
+                            <a class="labelText">{{label.label}}</a>
+                            <div [style.visibility]="labelHoverCheck(label,value) ? 'visible' : 'hidden'">
+                                <img src="../../../assets/icon/clear-24px.svg" (click)="removeLabel(label,value)"
+                                    class="clear" width="10px" height="10px">
+
+                            </div>
+                        </div>
+
+                    </button>
+
+                </div>
+
+
+
+
+            </div>
+            <mat-card-footer>
+                <app-icon-bar [style.visibility]="isFootVisible(value) ? 'visible' : 'hidden'"
+                    (eventCarrier)="recieveMessageFromIconTray($event,value.id)"></app-icon-bar>
+            </mat-card-footer>
+        </mat-card>
+
+
+
+    </div>
 
 </div>

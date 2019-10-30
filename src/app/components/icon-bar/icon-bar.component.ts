@@ -8,6 +8,7 @@ import { FormControl } from '@angular/forms';
 import { ImageSetterComponent } from '../image-setter/image-setter.component';
 import { MatDialog } from '@angular/material';
 import { CollaboratorComponent } from '../collaborator/collaborator.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-icon-bar',
@@ -37,7 +38,7 @@ export class IconBarComponent implements OnInit {
   @Output() eventCarrier = new EventEmitter<Events>();
   @Output() saveNote = new EventEmitter<Boolean>();
   constructor( private dataService:DataService,private notesService:NotesSerivesService,
-    private dialog:MatDialog) { }
+    private dialog:MatDialog,private router:Router) { }
 
   ngOnInit() {
     this.dataService.currentMessage.subscribe(message => this.message = message)
@@ -140,6 +141,10 @@ export class IconBarComponent implements OnInit {
     dialogref.afterClosed().subscribe(result=> {
       //console.log("dialog result ", result);
     })
+  }
+  addQuestion(){
+    console.log("navigating to  qna")
+    this.router.navigate(['questionAnswer', this.note.id])
   }
   
 }
