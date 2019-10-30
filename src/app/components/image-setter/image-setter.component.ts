@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {  MatDialogRef,  } from '@angular/material/dialog';
 import { DisplayComponent } from '../display/display.component';
 import { HttpClient } from '@angular/common/http';
 import { AppServiceService } from '../../services/app-service.service';

@@ -5,8 +5,9 @@ import { DataService } from "../../services/data.service";
 import {MatDialog} from '@angular/material/dialog';
 import {DialogueComponent} from '../note-edit-box/note-edit-box.component';
 import {Labels} from '../../models/labels'
-import { throwMatDuplicatedDrawerError } from '@angular/material';
+//import { throwMatDuplicatedDrawerError } from '@angular/material';
 import {Events} from '../../models/eventModel'
+import { SnackbarService } from 'src/app/services/snack-bar.service';
 @Component({
   selector: 'app-display',
   templateUrl: './display.component.html',
@@ -26,6 +27,7 @@ export class DisplayComponent implements OnInit {
   event:Events;
   text : any = " "
   labels:Labels[];
+  reminders:any;
   isPined:boolean;
   pinnedlogoPath:string="../assets/icon/Pinned.png"
   UnpinnedPath:string="../assets/icon/Unpinned.png"
@@ -35,7 +37,8 @@ export class DisplayComponent implements OnInit {
   @Input() searchedNotes:Notes[];
   @Input() unPinned:Notes[];
   @Input() component:string;
-  constructor(private noteService: NotesSerivesService,private dataService:DataService,private dialog:MatDialog) {
+  constructor(private noteService: NotesSerivesService,private dataService:DataService,
+    private dialog:MatDialog,private snackbar:SnackbarService) {
   
    }
 
@@ -291,4 +294,20 @@ componentSearch(){
   
   else return false;
 }
+removeReminder(note) {
+  
+  this.noteService.deleteReminder(
+    {
+      "noteIdList": [note.id]
+    })
+    .subscribe(
+      (data) => {
+        this.snackbar.open('Reminder Deleted')
+        this.displayNotes();
+      },
+      error => {
+        this.snackbar.open('Error deleting reminder', 'Retry')
+      })
+}
+
 }

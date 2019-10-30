@@ -30,7 +30,7 @@ export class HttpService {
     this.httpOptions = {
       headers: new HttpHeaders({
         'content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': localStorage.getItem('userToken')
+        'Authorization': localStorage.getItem('id')
       })
     };
     return this.http.post(this.API_URL + url, this.encode(notes), this.httpOptions);
@@ -38,7 +38,7 @@ export class HttpService {
   httpGetData(url) {
     let headers = new HttpHeaders({
       'Accept': 'application/json',
-      'Authorization': localStorage.getItem('userToken')
+      'Authorization': localStorage.getItem('id')
     });
     return this.http.get(this.API_URL + url, { headers });
   }
@@ -47,7 +47,7 @@ export class HttpService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': localStorage.getItem('userToken')
+        'Authorization': localStorage.getItem('id')
       })
     }
     return this.http.post(url, this.encode(data), httpOptions);
@@ -57,7 +57,7 @@ export class HttpService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': localStorage.getItem('userToken')
+        'Authorization': localStorage.getItem('id')
       })
     }
     return this.http.delete(url, httpOptions);
@@ -69,7 +69,7 @@ export class HttpService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('userToken')
+        'Authorization': localStorage.getItem('id')
       })
     }
     console.log(url,body,httpOptions)
@@ -79,10 +79,10 @@ export class HttpService {
     url = environment.link + url;
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': localStorage.getItem('userToken')
+        'Authorization': localStorage.getItem('id')
       })
     }
-    console.log(localStorage.getItem('userToken'), "token")
+    //console.log(localStorage.getItem('id'), "token")
     return this.http.post(url, body, httpOptions)
   }
   getConfig(url) {

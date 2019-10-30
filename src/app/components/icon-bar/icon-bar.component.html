@@ -7,7 +7,10 @@
            <mat-icon>color_lens</mat-icon>     </button>
         <button mat-icon-button (click)=archive()> 
            <mat-icon>archive</mat-icon>      </button>
-            <app-reminder [note]="note"></app-reminder>
+           <button mat-icon-button (click)=addCollaborator()> 
+              <mat-icon>group_add</mat-icon>      </button>
+            
+              <app-reminder [note]="note"></app-reminder>
                
         
         <!-- <button mat-icon-button (click)=saveNotes()> <mat-icon >save      

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { AppServiceService } from '../../services/app-service.service'
 import { Router } from '@angular/router'
+import { DataService } from '../../services/data.service'
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -16,6 +17,11 @@ export class RegisterComponent implements OnInit {
   public email = new FormControl('', [Validators.required, Validators.email]);
   public password = new FormControl('', [Validators.required, Validators.minLength(8),Validators.pattern("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?:[@#$%&]*).{8,}$")]);
   public ConfirmPassword = new FormControl('', [Validators.required, Validators.minLength(8)]);
+
+
+  constructor(private appService: AppServiceService, private routing: Router) {
+
+  }
 
   getEmailInvalidMessage() {
     if (this.email.hasError("required")) {
@@ -91,15 +97,10 @@ export class RegisterComponent implements OnInit {
 
   }
 
-  constructor(private appService: AppServiceService, private routing: Router) {
-
-  }
+ 
 
   ngOnInit() {
     console.log(this.appService)
   }
-  ngOnChanges() {
-
-
-  }
+  
 }

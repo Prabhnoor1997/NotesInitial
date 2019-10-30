@@ -5,13 +5,13 @@
 <mat-menu #reminderSetter="matMenu">
     <a class="Reminder"> &nbsp; Reminder:</a>
     
-      <button mat-menu-item *ngFor="let reminder of reminderList"   >
-          <div fxLayout="row" fxLayoutAlign="space-between center" class="reminderList" (click)="setReminder(reminder)" >
+      <button mat-menu-item *ngFor="let reminder of reminderList"  (click)="reminderAdd(reminder)" >
+          <div fxLayout="row" fxLayoutAlign="space-between center" class="reminderList"  >
               <a>{{reminder.Day}} &nbsp;</a>
               <a>{{reminder.Time}}</a>
           </div>
       </button>
-      <button mat-icon-button [matMenuTriggerFor]="datePicker" (click) = "$event.stopPropagation()" >  <mat-icon>timer</mat-icon> <a>&nbsp; Custom Date</a> </button>
+      <button mat-icon-button [matMenuTriggerFor]="datePicker" (click) = "$event.stopPropagation() "  >  <mat-icon>timer</mat-icon> <a>&nbsp; Custom Date</a> </button>
      
 
 </mat-menu>
@@ -27,8 +27,8 @@
         
               <mat-form-field (click) = "$event.stopPropagation()">
                 <mat-label>Select an option</mat-label>
-                <mat-select [(value)]="timeSelected">
-                  <mat-option *ngFor="let time of timeList " value="{{time.title}}">
+                <mat-select [(ngModel)]="timeSelected" >
+                  <mat-option *ngFor="let time of timeList " [value]="time">
                       
                         <div fxLayout="row" fxLayoutAlign="space-between center" class="reminderList" >
                                 <a>{{time.title}} &nbsp;</a>
@@ -43,7 +43,7 @@
            
 
 </div>
-<button mat-button class="saveButton" (click)=reminderAdd()>Save</button>
+<button mat-button class="saveButton" (click)=reminderAddPicked()>Save</button>
   
    
 </mat-menu>

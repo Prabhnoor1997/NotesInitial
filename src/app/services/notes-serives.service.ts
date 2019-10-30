@@ -178,6 +178,9 @@ export class NotesSerivesService {
   removeCollaborator(noteId, collaboratorId) {
     return this.httpService.encodedPostFormDelete('notes/' + noteId + '/removeCollaboratorsNotes/' + collaboratorId)
   }
+  deleteReminder(body) {
+    return this.httpService.postJSON('notes/removeReminderNotes', body)
+  }
   }
   
   

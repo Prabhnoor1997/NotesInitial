@@ -31,7 +31,10 @@ export class NotesComponent implements OnInit {
       this.notes=this.notes.reverse();
       this.notes=this.filterTrash(this.notes);
       this.setPinUnpinNotes(this.notes);
-    })
+      console.log(this.pinnedNotes);
+    }
+    
+    )
   }
   
 
@@ -82,4 +85,5 @@ recieveMessageFromDisplay(event){
   if(event.purpose=="refresh")
   this.getNotes()
 }
+
 }

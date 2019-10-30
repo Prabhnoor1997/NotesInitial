@@ -32,7 +32,11 @@ import { SearchPipe } from './search.pipe';
 import { SearchComponent } from './components/search/search.component';
 import { LabelComponent } from './components/label/label.component';
 import { CardComponent } from './components/card/card.component';
-import { ReminderComponent } from './components/reminder/reminder.component'
+import { ReminderComponent } from './components/reminder/reminder.component';
+import { CollaboratorComponent } from './components/collaborator/collaborator.component'
+import {MatSnackBarModule} from "@angular/material"
+import { SnackbarService } from './services/snack-bar.service';
+import { HttpService } from './services/http.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,10 +59,11 @@ import { ReminderComponent } from './components/reminder/reminder.component'
     SearchComponent,
     LabelComponent,
     CardComponent,
-    ReminderComponent
+    ReminderComponent,
+    CollaboratorComponent
     
   ],
-  entryComponents : [DialogueComponent,LabelEditComponent,ImageSetterComponent],
+  entryComponents : [DialogueComponent,LabelEditComponent,ImageSetterComponent,CollaboratorComponent],
   imports: [
     BrowserModule,
     MyMaterialModule,
@@ -67,9 +72,10 @@ import { ReminderComponent } from './components/reminder/reminder.component'
     FlexLayoutModule,
     HttpClientModule,
     routing,
-    ImageCropperModule
+    ImageCropperModule,
+    MatSnackBarModule
   ],
-  providers: [AppServiceService, NotesSerivesService,DataService,AuthGuard ],
+  providers: [AppServiceService, NotesSerivesService,DataService,AuthGuard,HttpService,SnackbarService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

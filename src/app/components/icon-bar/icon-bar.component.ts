@@ -5,6 +5,9 @@ import {Events} from '../../models/eventModel'
 import {NotesSerivesService  } from '../../services/notes-serives.service'
 import {Labels} from '../../models/labels'
 import { FormControl } from '@angular/forms';
+import { ImageSetterComponent } from '../image-setter/image-setter.component';
+import { MatDialog } from '@angular/material';
+import { CollaboratorComponent } from '../collaborator/collaborator.component';
 
 @Component({
   selector: 'app-icon-bar',
@@ -33,7 +36,8 @@ export class IconBarComponent implements OnInit {
   
   @Output() eventCarrier = new EventEmitter<Events>();
   @Output() saveNote = new EventEmitter<Boolean>();
-  constructor( private dataService:DataService,private notesService:NotesSerivesService) { }
+  constructor( private dataService:DataService,private notesService:NotesSerivesService,
+    private dialog:MatDialog) { }
 
   ngOnInit() {
     this.dataService.currentMessage.subscribe(message => this.message = message)
@@ -127,6 +131,15 @@ export class IconBarComponent implements OnInit {
     
     return true;
   }
-
+  addCollaborator(){
+    let dialogref = this.dialog.open(CollaboratorComponent,{
+      data : {
+        note:this.note     
+      }
+    });
+    dialogref.afterClosed().subscribe(result=> {
+      //console.log("dialog result ", result);
+    })
+  }
   
 }

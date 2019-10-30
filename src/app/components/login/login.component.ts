@@ -46,6 +46,11 @@ login(email,password){
 this.appService.postRequest(user,'user/login').subscribe((data:any)=>{
   localStorage.setItem('id',data.id);
   localStorage.setItem('userId',data.userId);
+  localStorage.setItem('email',data.email);
+  localStorage.setItem('firstName',data.firstName);
+  localStorage.setItem('lastName',data.lastName);
+  console.log(data);
+  //localStorage.setItem('userId',data.userId);
  
   if(data!=undefined){
       console.log("redirecting to dashboard")
