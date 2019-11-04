@@ -3,7 +3,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NotesSerivesService } from '../../services/notes-serives.service';
 import { SnackbarService } from 'src/app/services/snack-bar.service';
 
-
 @Component({
   selector: 'app-collaborator',
   templateUrl: './collaborator.component.html',
@@ -44,7 +43,7 @@ export class CollaboratorComponent implements OnInit {
     }
   }
   addCollaborator() {
-    ;
+    
     try {
       if (this.email != this.collaboratorBody.email && this.collaboratorBody.email != '') {
 

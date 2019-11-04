@@ -8,18 +8,22 @@ import { LabelEditComponent } from '../label-edit/label-edit.component';
 import { ImageSetterComponent } from '../image-setter/image-setter.component';
 import {environment} from '../../../environments/environment'
 import {routing} from '../../app.routing'
-
+import { HostListener } from "@angular/core";
 @Component({ 
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
+
 export class DashboardComponent implements OnInit {
   message:string;
   labels:Labels[];
   picUrl:any;
+  screenHeight:number;
+  screenWidth:number;
+  viewType:string="view_list";
   constructor(private dialog:MatDialog,private dataService: DataService,private routing:Router,private noteService:NotesSerivesService) {
-    
+    this.onResize()
    }
 
   ngOnInit() {
@@ -29,7 +33,12 @@ export class DashboardComponent implements OnInit {
 
     this.initUrlPic()
   }
-
+  @HostListener('window:resize', ['$event'])
+  onResize(event?) {
+     this.screenHeight = window.innerHeight;
+     this.screenWidth = window.innerWidth;
+     console.log(this.screenHeight, this.screenWidth);
+  }
   initUrlPic(){
     this.picUrl=environment.linkPic+localStorage.getItem('pic')
   }
@@ -103,5 +112,18 @@ navigateToLabel(label){
   
   this.dataService.labelNameNext(label)
   this.routing.navigate(['labels/'+label])
+}
+getDrawerMode(){
+  if(this.screenWidth<650)
+  return"over"
+  else 
+  return"side"
+}
+rowToggle(){
+  this.dataService.changeMessage("grid View")
+  if(this.viewType=="view_list")
+    this.viewType="grid_on"
+    else
+    this.viewType="view_list"
 }
 }

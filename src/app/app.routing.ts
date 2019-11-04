@@ -14,6 +14,7 @@ import {TrashComponent} from './components/trash/trash.component'
 import {ArchiveComponent} from './components/archive/archive.component'
 import {SearchComponent} from './components/search/search.component'
 import {LabelComponent} from './components/label/label.component'
+import { QuestionAnswerComponent } from './components/question-answer/question-answer.component';
 //import { AuthGuard } from './_guards';
 
 const appRoutes: Routes = [
@@ -25,6 +26,7 @@ const appRoutes: Routes = [
         {path: 'trash',component:TrashComponent},
         {path: 'archive',component:ArchiveComponent},
         {path: 'search',component:SearchComponent},
+        {path:'questionAnswer/:cardId',component:QuestionAnswerComponent},
         {path: 'labels/:labelName',component:LabelComponent}
 
         //{path:'trash',component:},

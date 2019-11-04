@@ -10,6 +10,9 @@ export class QuestionAnswerComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  }
 
+  }
+  show( value){
+    console.log("value", value)
+  }
 }

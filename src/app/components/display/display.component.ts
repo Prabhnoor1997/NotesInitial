@@ -33,6 +33,8 @@ export class DisplayComponent implements OnInit {
   UnpinnedPath:string="../assets/icon/Unpinned.png"
   pinPath:string="../assets/icon/Unpinned.png";
   componentName:string="notes"
+  displayValue:string="flex";
+  widthCard:string="250px";
   @Input() pinnedNotes:Notes[];
   @Input() searchedNotes:Notes[];
   @Input() unPinned:Notes[];
@@ -47,7 +49,18 @@ export class DisplayComponent implements OnInit {
     
     //this.displayNotes();
     this.dataService.currentMessage.subscribe(message => {
-      if(message=='Note Added')
+      if(message=='grid View')
+      { 
+        if(this.displayValue=="flex")
+        {this.displayValue="table-cell";
+        this.widthCard="320px"
+      }
+        else
+        {
+        this.displayValue="flex";
+          this.widthCard="250px"
+      }
+      }
       //this.checkNoteAdded();
       //if(message=="searchIn"){
        // console.log(this.searchedNotes);

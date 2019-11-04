@@ -3,10 +3,14 @@
     <p>Pinned</p>
     <div class="noteGridContainer">
 
+        <div  class="grid-row" [style.display]="displayValue">
+        
         <mat-card *ngFor="let value of pinnedNotes; let i = index" (mouseover)="hoverIn(value)" (mouseout)="hoverOut()"
             class="grid-item" [ngStyle]="{background: value.color}" fxLayout="column"
-            fxLayoutAlign="space-between stretch">
+            fxLayoutAlign="space-between stretch" [style.width]="widthCard">
+            
             <div>
+                    
                 <mat-card-title>
                     <div fxLayout="row" fxLayoutAlign="space-between center"></div>
                     <div fxLayout="row" fxLayoutAlign="space-between start">
@@ -82,16 +86,20 @@
                     (eventCarrier)="recieveMessageFromIconTray($event,value.id)" [note]="value">
                 </app-icon-bar>
             </mat-card-footer>
+        
         </mat-card>
+    </div>
 
 
     </div>
     <p>Non-pinned</p>
     <div class="noteGridContainer">
+        <div  class="grid-row" [style.display]="displayValue">
 
+        
         <mat-card *ngFor="let value of unPinned; let i = index" (mouseover)="hoverIn(value)" (mouseout)="hoverOut()"
         class="grid-item" [ngStyle]="{background: value.color}" fxLayout="column"
-        fxLayoutAlign="space-between stretch">
+        fxLayoutAlign="space-between stretch" [style.width]="widthCard">
         <div>
             <mat-card-title>
                 <div fxLayout="row" fxLayoutAlign="space-between center"></div>
@@ -168,17 +176,19 @@
                 (eventCarrier)="recieveMessageFromIconTray($event,value.id)" [note]="value">
             </app-icon-bar>
         </mat-card-footer>
+    
     </mat-card>
+</div>
 
 
     </div>
 </div>
 <div *ngIf="componentSearch()">
     <div class="noteGridContainer">
-
+        <div  class="grid-row" [style.display]="displayValue" >
         <mat-card *ngFor="let value of searchedNotes; let i = index" (mouseover)="hoverIn(value)"
             (mouseout)="hoverOut()" class="grid-item" [ngStyle]="{background: value.color}" fxLayout="column"
-            fxLayoutAlign="space-between stretch">
+            fxLayoutAlign="space-between stretch" [style.width]="widthCard">
             <div>
                 <div fxLayout="row" fxLayoutAlign="space-between center">
                     <mat-card-title (click)=openDialog(value)><b class="title">{{value.title}}</b></mat-card-title>
@@ -223,7 +233,9 @@
                 <app-icon-bar [style.visibility]="isFootVisible(value) ? 'visible' : 'hidden'"
                     (eventCarrier)="recieveMessageFromIconTray($event,value.id)"></app-icon-bar>
             </mat-card-footer>
+        
         </mat-card>
+    </div>
 
 
 

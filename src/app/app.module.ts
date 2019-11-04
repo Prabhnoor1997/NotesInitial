@@ -37,6 +37,8 @@ import { CollaboratorComponent } from './components/collaborator/collaborator.co
 import {MatSnackBarModule} from "@angular/material"
 import { SnackbarService } from './services/snack-bar.service';
 import { HttpService } from './services/http.service';
+import { QuestionAnswerComponent } from './components/question-answer/question-answer.component';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,10 +62,12 @@ import { HttpService } from './services/http.service';
     LabelComponent,
     CardComponent,
     ReminderComponent,
-    CollaboratorComponent
+    CollaboratorComponent,
+    QuestionAnswerComponent
     
   ],
-  entryComponents : [DialogueComponent,LabelEditComponent,ImageSetterComponent,CollaboratorComponent],
+  entryComponents : [DialogueComponent,LabelEditComponent,ImageSetterComponent,
+    CollaboratorComponent],
   imports: [
     BrowserModule,
     MyMaterialModule,
@@ -73,7 +77,9 @@ import { HttpService } from './services/http.service';
     HttpClientModule,
     routing,
     ImageCropperModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    FroalaEditorModule.forRoot(), 
+    FroalaViewModule.forRoot()
   ],
   providers: [AppServiceService, NotesSerivesService,DataService,AuthGuard,HttpService,SnackbarService ],
   bootstrap: [AppComponent]
