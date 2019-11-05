@@ -1,7 +1,6 @@
 import { Component, OnInit, ɵConsole } from '@angular/core';
 import {DataService} from '../../services/data.service'
 import { NotesSerivesService } from '../../services/notes-serives.service';
-import { ActivatedRoute } from '@angular/router'
 import {Notes} from '../../models/notesModel'
 
 @Component({
@@ -15,7 +14,7 @@ export class LabelComponent implements OnInit {
   pinnedNotes:Notes[];
   unPinned:Notes[];
   component:string="label";
-  constructor(private dataService: DataService,private noteService:NotesSerivesService,private Arouter:ActivatedRoute) { }
+  constructor(private dataService: DataService,private noteService:NotesSerivesService) { }
 
   ngOnInit() {
     

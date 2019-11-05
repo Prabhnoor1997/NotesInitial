@@ -15,6 +15,7 @@ import {ArchiveComponent} from './components/archive/archive.component'
 import {SearchComponent} from './components/search/search.component'
 import {LabelComponent} from './components/label/label.component'
 import { QuestionAnswerComponent } from './components/question-answer/question-answer.component';
+import { ReminderMainComponent } from './components/reminder-main/reminder-main.component';
 //import { AuthGuard } from './_guards';
 
 const appRoutes: Routes = [
@@ -27,7 +28,8 @@ const appRoutes: Routes = [
         {path: 'archive',component:ArchiveComponent},
         {path: 'search',component:SearchComponent},
         {path:'questionAnswer/:cardId',component:QuestionAnswerComponent},
-        {path: 'labels/:labelName',component:LabelComponent}
+        {path: 'labels/:labelName',component:LabelComponent},
+        {path: 'reminder', component:ReminderMainComponent}
 
         //{path:'trash',component:},
     ] },

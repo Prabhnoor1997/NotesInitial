@@ -181,6 +181,7 @@ export class NotesSerivesService {
   deleteReminder(body) {
     return this.httpService.postJSON('notes/removeReminderNotes', body)
   }
+
   }
   
   

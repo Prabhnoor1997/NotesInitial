@@ -10,7 +10,7 @@
            <button mat-icon-button (click)=addCollaborator()> 
               <mat-icon>group_add</mat-icon>      </button>
             
-              <app-reminder [note]="note"></app-reminder>
+              <app-reminder [note]="note" (eventCarrier)="recieveMessageFromReminder($event)"></app-reminder>
                
         
         <!-- <button mat-icon-button (click)=saveNotes()> <mat-icon >save      

@@ -3,6 +3,7 @@ import {Notes} from '../../models/notesModel'
 import {NotesSerivesService} from '../../services/notes-serives.service'
 import {Router} from '@angular/router'
 import { DataService } from "../../services/data.service";
+import { Labels } from 'src/app/models/labels';
 
 
 
@@ -19,11 +20,16 @@ export class NoteFieldComponent implements OnInit {
   notes: Notes;
   id:string;
   notesArr : Notes[];
+ 
   message:string;
+  noteLabels=[];
+  labelIdList=[];
   color:string ="#ffffff";
   isArchived:boolean=false;
   isPined:boolean=false;
-  showTit:boolean=false
+  showTit:boolean=false;
+  reminder:any=null;
+  
   description:string="Take a Note..."
   pinnedlogoPath:string="../assets/icon/Pinned.png"
   UnpinnedPath:string="../assets/icon/Unpinned.png"
@@ -34,7 +40,7 @@ export class NoteFieldComponent implements OnInit {
     this.dataService.currentMessage.subscribe(message => this.message = message)
   }
   showTitle(){
-    console.log("fdfsdf")
+    //console.log("fdfsdf")
     this.showTit=true;
     this.description="Description"
   }
@@ -76,26 +82,29 @@ export class NoteFieldComponent implements OnInit {
   }
   saveNote(){
     this.showTit=false;
-      this.description="Take a Note..."
+    this.description="Take a Note..."
     this.notes = {
       title:this.title,
       description:this.note ,
       color:this.color,
       isArchived:this.isArchived,  
-      isPined:this.isPined 
+      isPined:this.isPined ,
+      reminder:this.reminder,
+      labelIdList:JSON.stringify(this.labelIdList)
     }
 
     let url="addNotes"
     this.noteService.postRequest(url,this.notes).subscribe(
       (data:any)=>
     {
-      console.log(data);
+      //console.log(data);
       this.newMessage();
     
       this.color="#ffffff"
       this.note="";
       this.title="";
-      
+      this.reminder=null;
+      this.noteLabels=null;
     },
     (err) => {
    
@@ -122,8 +131,32 @@ export class NoteFieldComponent implements OnInit {
         
   
       }
+      if($event.purpose=="reminder")
+      {
+        this.reminder=$event.value;
+      
+      }
+      if($event.purpose=="addLabel"){
+        
+       
+         this.noteLabels.push($event.value.label)
+         this.labelIdList.push($event.value.label.id)
+        
+        
+        
+              }
     }
-
+    removeReminder(){
+      this.reminder=null;
+    }
+    removeLabel(label){
+     //
+      console.log(label,this.noteLabels)
+      this.noteLabels = this.noteLabels.filter(function(note) {
+        return (note.label!=label.label);
+      });
+      
+    }
    
   }
   

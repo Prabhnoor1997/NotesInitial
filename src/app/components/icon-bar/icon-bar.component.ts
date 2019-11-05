@@ -30,6 +30,7 @@ export class IconBarComponent implements OnInit {
   newLabel:string;
   labels:Labels[];
   labelCheck = new FormControl();
+  reminder:any;
   // labelCheck:boolean=false//labelStatus[];
   @Input() note:any;
   @Input() noteId:string;
@@ -110,7 +111,7 @@ export class IconBarComponent implements OnInit {
   labelAddOrRemove(label){
     let data={
       "noteId":this.noteId,
-      "labelId":label.id
+      "label":label
     }
     this.event={
       "purpose":"addLabel",
@@ -145,6 +146,25 @@ export class IconBarComponent implements OnInit {
   addQuestion(){
     console.log("navigating to  qna")
     this.router.navigate(['questionAnswer', this.note.id])
+  }
+
+  addReminder(){
+    let data={
+      "noteIdList":[this.note['id']],
+      "reminder":this.reminder
+    }
+    this.event={
+      "purpose":"reminder",
+      "value":data
+    }
+
+    this.eventCarrier.emit(this.event);
+
+  }
+  recieveMessageFromReminder($event){
+    
+      this.eventCarrier.emit($event)
+    
   }
   
 }

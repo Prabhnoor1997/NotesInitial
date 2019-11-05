@@ -31,7 +31,7 @@ export class NotesComponent implements OnInit {
       this.notes=this.notes.reverse();
       this.notes=this.filterTrash(this.notes);
       this.setPinUnpinNotes(this.notes);
-      console.log(this.pinnedNotes);
+      //console.log(this.pinnedNotes);
     }
     
     )
@@ -40,11 +40,11 @@ export class NotesComponent implements OnInit {
 
 
   filterTrash(notes){
-    console.log(notes);
+   // console.log(notes);
     var newNote = notes.filter(function(note) {
       return (note.isDeleted==false && note.isArchived==false);
     });
-    console.log("New note--------"+ newNote)
+    //console.log("New note--------"+ newNote)
     return newNote;
 
   }
@@ -74,7 +74,7 @@ setPinUnpinNotes(notes){
   
 
 checkNoteAdded(){
-  console.log("in note add")
+  //console.log("in note add")
   if(this.message="Note Added")
     this.getNotes();
     //this.message="";

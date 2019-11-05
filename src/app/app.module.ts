@@ -39,6 +39,7 @@ import { SnackbarService } from './services/snack-bar.service';
 import { HttpService } from './services/http.service';
 import { QuestionAnswerComponent } from './components/question-answer/question-answer.component';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { ReminderMainComponent } from '../app/components/reminder-main/reminder-main.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,7 +64,8 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
     CardComponent,
     ReminderComponent,
     CollaboratorComponent,
-    QuestionAnswerComponent
+    QuestionAnswerComponent,
+    ReminderMainComponent
     
   ],
   entryComponents : [DialogueComponent,LabelEditComponent,ImageSetterComponent,

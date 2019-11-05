@@ -1,8 +1,9 @@
-import { Component, OnInit ,Input} from '@angular/core';
+import { Component, OnInit ,Input, EventEmitter, Output} from '@angular/core';
 import { FormControl } from '@angular/forms'
 import {   Notes } from "../../models/notesModel";
 import {NotesSerivesService} from '../../services/notes-serives.service';
 import { DataService } from 'src/app/services/data.service';
+import { Events } from 'src/app/models/eventModel';
 @Component({
   selector: 'app-reminder',
   templateUrl: './reminder.component.html',
@@ -13,8 +14,11 @@ export class ReminderComponent implements OnInit {
   minDate=new Date();
   dayCount:number=0;
   timeCount:number=0;
-  
+  reminder:any;
+  event:Events;
+  @Output() eventCarrier = new EventEmitter<Events>()
   @Input() note:Notes;
+  
   reminderList = [
     {Day: "Later Today", Time: "20:00", dayCount: 0, timeCount: 20 },
     {Day: "Tomorrow", Time: "08:00", dayCount: 1, timeCount: 8},
@@ -37,15 +41,20 @@ reminderAdd(reminder){
     //console.log("this is picked date"+this.pickedDate,"this is picked time",this.timeSelected,this.note['id'] )
     //this.timeCount=this.timeSelected
     let data={
-      "noteIdList":[this.note['id']],
+      
       "reminder": new Date(this.pickedDate.value.getFullYear(), this.pickedDate.value.getMonth(),
         this.pickedDate.value.getDate() + reminder.dayCount, reminder.timeCount, 0, 0, 0)
     }
+
+    this.reminder=data.reminder;
+    this.event={
+      "purpose":"reminder",
+      "value":this.reminder
+    }
+  
+    this.eventCarrier.emit(this.event);
     //console.log(data)
-    this.noteService.addUpdateReminder(data).subscribe((data:any)=>{
-      //console.log(data);
-      this.dataService.changeMessage("Note Edited")
-    });
+    
     
   }
   reminderAddPicked(){

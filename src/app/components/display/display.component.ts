@@ -8,6 +8,8 @@ import {Labels} from '../../models/labels'
 //import { throwMatDuplicatedDrawerError } from '@angular/material';
 import {Events} from '../../models/eventModel'
 import { SnackbarService } from 'src/app/services/snack-bar.service';
+import { HostListener } from "@angular/core";
+import { SELECT_PANEL_VIEWPORT_PADDING } from '@angular/material';
 @Component({
   selector: 'app-display',
   templateUrl: './display.component.html',
@@ -24,6 +26,8 @@ export class DisplayComponent implements OnInit {
   public dispalyIconTray: string="hidden";
   public hoverDiv:any 
   public hoverLabel:any
+  screenWidth:number=1300;
+  screenHeight:number;
   event:Events;
   text : any = " "
   labels:Labels[];
@@ -51,15 +55,8 @@ export class DisplayComponent implements OnInit {
     this.dataService.currentMessage.subscribe(message => {
       if(message=='grid View')
       { 
-        if(this.displayValue=="flex")
-        {this.displayValue="table-cell";
-        this.widthCard="320px"
-      }
-        else
-        {
-        this.displayValue="flex";
-          this.widthCard="250px"
-      }
+        this.setView();
+      
       }
       //this.checkNoteAdded();
       //if(message=="searchIn"){
@@ -79,7 +76,26 @@ export class DisplayComponent implements OnInit {
     
 
   }
+  @HostListener('window:resize', ['$event'])
+  onResize(event?) {
 
+     this.screenHeight = window.innerHeight;
+     this.screenWidth = window.innerWidth;
+     this.setView();
+  }
+  setView(){
+    if(this.displayValue=="flex")
+    {
+      this.displayValue="table-cell";
+      this.widthCard=this.screenWidth/2.4+"px";
+  }
+    else
+    {
+    this.displayValue="flex";
+      this.widthCard="250px"
+  }
+
+  }
   getNotes(note) {
       this.noteSelected=note;
       //console.log(this.noteSelected);
@@ -96,7 +112,8 @@ export class DisplayComponent implements OnInit {
  }
 
   recieveMessageFromIconTray($event,id){
-    console.log($event,id)
+    console.log($event,id+"------",this.pinnedNotes)
+
     if($event.purpose=="delete" ){
       let data={
         "noteIdList":[id],
@@ -155,7 +172,7 @@ export class DisplayComponent implements OnInit {
     if($event.purpose=="addLabel"){
       let data={
         "noteIdList": id,
-        "labelId":$event.value.labelId
+        "labelId":$event.value.label.id
       }
       console.log(data);
       this.noteService.labelAttach(data).subscribe((data:any)=>{
@@ -163,7 +180,17 @@ export class DisplayComponent implements OnInit {
         this.displayNotes();
       });
     }
-
+    if($event.purpose=="reminder"){
+      let data={
+        "noteIdList": id,
+        "reminder":$event.value
+      }
+      console.log("display insdie reminder",data);
+      this.noteService.addUpdateReminder(data).subscribe((data:any)=>{
+        //console.log(data);
+        this.dataService.changeMessage("Note Edited")
+      });
+    }
 
   }
 
@@ -214,7 +241,7 @@ export class DisplayComponent implements OnInit {
     this.noteService.getLabel().subscribe((data:any)=>{
       //console.log(data);
       this.labels=data.data.details;
-     
+     //console.log(this.labels);
       
     })
   }
@@ -297,9 +324,9 @@ componentNotesOrlabels(){
   
   else return false;
 }
-componentSearch(){
+componentSearchOrReminder(){
   //console.log("inside search",this.component,this.searchedNotes)
-  if(this.component=="search")
+  if(this.component=="search" || this.component=="reminder")
   {
      
       return true
@@ -322,5 +349,7 @@ removeReminder(note) {
         this.snackbar.open('Error deleting reminder', 'Retry')
       })
 }
+
+
 
 }

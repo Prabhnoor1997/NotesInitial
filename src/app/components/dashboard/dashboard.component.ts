@@ -22,7 +22,8 @@ export class DashboardComponent implements OnInit {
   screenHeight:number;
   screenWidth:number;
   viewType:string="view_list";
-  constructor(private dialog:MatDialog,private dataService: DataService,private routing:Router,private noteService:NotesSerivesService) {
+  constructor(private dialog:MatDialog,private dataService: DataService,
+    private routing:Router,private noteService:NotesSerivesService) {
     this.onResize()
    }
 
@@ -125,5 +126,8 @@ rowToggle(){
     this.viewType="grid_on"
     else
     this.viewType="view_list"
+}
+navigateToReminder(){
+  this.routing.navigate(['reminder'])
 }
 }

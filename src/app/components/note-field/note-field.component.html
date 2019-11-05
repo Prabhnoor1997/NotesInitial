@@ -45,11 +45,53 @@
 
 
 </form>
+<div class="labelsContainer" fxLayout="row">
 
+
+  <div *ngIf="reminder!=null">
+      <button mat-mini-fab class="labelButton" [ngStyle]="{background:color}">
+          <div fxLayout="row">
+              <img src="../../../assets/icon/schedule-24px.svg" class="reminder" width="15px"
+                  height="15px">
+              <a class="labelText">{{reminder|date:shortdate}}</a>
+              <div >
+                  <img src="../../../assets/icon/clear-24px.svg" class="tick"
+                      (click)="removeReminder()" class="clear" width="10px" height="10px">
+
+              </div>
+          </div>
+
+      </button>
+  </div>
+
+  <div *ngFor="let label of noteLabels">
+
+
+
+      <button mat-mini-fab class="labelButton" [ngStyle]="{background: color}">
+          <div fxLayout="row">
+              <a class="labelText">{{label.label}}</a>
+              <div >
+                  <img src="../../../assets/icon/clear-24px.svg" class="tick"
+                      (click)="removeLabel(label)" class="clear" width="10px" height="10px">
+
+              </div>
+          </div>
+
+      </button>
+
+  </div>
+
+
+
+
+
+
+</div>
 
 <div class="footer" fxLayoutAlign="space-between center" *ngIf="showTit">
     <app-icon-bar (eventCarrier)="recieveMessageFromIconTray($event)" (saveNote)="saveButtonClick($event)"></app-icon-bar>
-    <button mat-button fxHide.lt-md="true" (click)="saveNote()" >Close</button>
+    <button mat-button  (click)="saveNote()" >Close</button>
 
   </div>
 </mat-card>
