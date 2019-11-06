@@ -10,6 +10,8 @@ import {Events} from '../../models/eventModel'
 import { SnackbarService } from 'src/app/services/snack-bar.service';
 import { HostListener } from "@angular/core";
 import { SELECT_PANEL_VIEWPORT_PADDING } from '@angular/material';
+import { CollaboratorComponent } from '../collaborator/collaborator.component';
+import {Router} from '@angular/router'
 @Component({
   selector: 'app-display',
   templateUrl: './display.component.html',
@@ -39,12 +41,13 @@ export class DisplayComponent implements OnInit {
   componentName:string="notes"
   displayValue:string="flex";
   widthCard:string="250px";
+  questionsArray=[];
   @Input() pinnedNotes:Notes[];
   @Input() searchedNotes:Notes[];
   @Input() unPinned:Notes[];
   @Input() component:string;
   constructor(private noteService: NotesSerivesService,private dataService:DataService,
-    private dialog:MatDialog,private snackbar:SnackbarService) {
+    private dialog:MatDialog,private snackbar:SnackbarService,private routing:Router) {
   
    }
 
@@ -182,8 +185,8 @@ export class DisplayComponent implements OnInit {
     }
     if($event.purpose=="reminder"){
       let data={
-        "noteIdList": id,
-        "reminder":$event.value
+        "noteIdList": [id],
+        "reminder":[$event.value]
       }
       console.log("display insdie reminder",data);
       this.noteService.addUpdateReminder(data).subscribe((data:any)=>{
@@ -194,7 +197,8 @@ export class DisplayComponent implements OnInit {
 
   }
 
-  passNote(){
+  passNote()
+  {
     
   }
   
@@ -335,7 +339,7 @@ componentSearchOrReminder(){
   else return false;
 }
 removeReminder(note) {
-  
+  console.log(note);
   this.noteService.deleteReminder(
     {
       "noteIdList": [note.id]
@@ -350,6 +354,22 @@ removeReminder(note) {
       })
 }
 
-
+openCollaborator(value){
+  let dialogref = this.dialog.open(CollaboratorComponent,{
+    data : {
+      note:value     
+    }
+  });
+  dialogref.afterClosed().subscribe(result=> {
+    //console.log("dialog result ", result);
+  })
+}
+navigateToReminders(){
+  this.routing.navigate(['reminder'])
+}
+navigateToLabel(label){
+  console.log("navigating to ",label)
+  this.routing.navigateByUrl('labels/'+label.label)
+}
 
 }

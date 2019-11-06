@@ -28,7 +28,7 @@ export class NoteFieldComponent implements OnInit {
   isArchived:boolean=false;
   isPined:boolean=false;
   showTit:boolean=false;
-  reminder:any=null;
+  reminder=[]; 
   
   description:string="Take a Note..."
   pinnedlogoPath:string="../assets/icon/Pinned.png"
@@ -89,10 +89,15 @@ export class NoteFieldComponent implements OnInit {
       color:this.color,
       isArchived:this.isArchived,  
       isPined:this.isPined ,
-      reminder:this.reminder,
+      
       labelIdList:JSON.stringify(this.labelIdList)
     }
 
+    if(this.reminder.length>0){
+      this.notes.reminder=(this.reminder)
+    }
+    
+    console.log(this.notes)
     let url="addNotes"
     this.noteService.postRequest(url,this.notes).subscribe(
       (data:any)=>
@@ -103,8 +108,9 @@ export class NoteFieldComponent implements OnInit {
       this.color="#ffffff"
       this.note="";
       this.title="";
-      this.reminder=null;
+      this.reminder=[];
       this.noteLabels=null;
+      this.labelIdList=null;
     },
     (err) => {
    
@@ -118,9 +124,7 @@ export class NoteFieldComponent implements OnInit {
         {
       
           this.color=$event.value;
-          
-      
-         
+    
         }
       }
 
@@ -133,7 +137,9 @@ export class NoteFieldComponent implements OnInit {
       }
       if($event.purpose=="reminder")
       {
-        this.reminder=$event.value;
+        this.reminder = [];
+        //console.log("event typw", typeof($event.value))
+        this.reminder.push($event.value);
       
       }
       if($event.purpose=="addLabel"){
@@ -147,7 +153,7 @@ export class NoteFieldComponent implements OnInit {
               }
     }
     removeReminder(){
-      this.reminder=null;
+      this.reminder= [];
     }
     removeLabel(label){
      //

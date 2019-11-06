@@ -12,7 +12,7 @@ export class QuestionAnswerComponent implements OnInit {
   ngOnInit() {
 
   }
-  show( value){
-    console.log("value", value)
+  submit( data){
+    console.log("value",data)
   }
 }

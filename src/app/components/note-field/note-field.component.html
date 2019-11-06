@@ -48,7 +48,7 @@
 <div class="labelsContainer" fxLayout="row">
 
 
-  <div *ngIf="reminder!=null">
+  <div *ngIf="reminder.length>0">
       <button mat-mini-fab class="labelButton" [ngStyle]="{background:color}">
           <div fxLayout="row">
               <img src="../../../assets/icon/schedule-24px.svg" class="reminder" width="15px"

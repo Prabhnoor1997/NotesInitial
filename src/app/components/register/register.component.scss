@@ -1,5 +1,5 @@
 .bod{
-  position: absolute;
+  //position: absolute;
   top:0;
   bottom: 0%;
   left: 0%;
@@ -42,7 +42,18 @@
   
 // }
 
+.card-container{
+  margin-bottom:40px;
+  }
+  .mat-card-container{
+  width:180px;
+  height:200px;
+  padding:24px;
+  transition: height 0.3s, box-shadow 0.3s;
+  
+  }
   .my-form{
+
     min-width: 150px;
     max-width: 500px;
     width: 100%;

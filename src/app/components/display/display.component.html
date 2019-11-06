@@ -16,7 +16,7 @@
                     <div fxLayout="row" fxLayoutAlign="space-between start">
                         <mat-card-title (click)=openDialog(value)><b class="title">{{value.title}}</b></mat-card-title>
                         <img src="{{pinAssign(value)}}"  [style.visibility]="isFootVisible(value) ? 'visible' : 'hidden'" (click)="togglePin(value)" class="logo" width="20px"
-                            height="20px">
+                            height="20px" cursor="poniter">
                     </div>
                 </mat-card-title>
             </div>
@@ -29,8 +29,8 @@
             <div>
 
 
-                <mat-icon *ngFor="let collaborator of value.collaborators" matTooltip="{{collaborator.firstName}}">
-                    person_pin</mat-icon>
+                <mat-icon class="logo" *ngFor="let collaborator of value.collaborators" matTooltip="{{collaborator.firstName}}" (click)="openCollaborator(value)">
+                    person_pin </mat-icon>
 
 
             </div>
@@ -39,8 +39,8 @@
             <div class="labelsContainer" fxLayout="row">
 
 
-                <div *ngIf="value.reminder.length!=0">
-                    <button mat-mini-fab class="labelButton" [ngStyle]="{background: value.color}">
+                <div *ngIf="value.reminder.length>0">
+                    <button mat-mini-fab class="labelButton" [ngStyle]="{background: value.color}" (click)="navigateToReminders()">
                         <div fxLayout="row">
                             <img src="../../../assets/icon/schedule-24px.svg" class="reminder" width="15px"
                                 height="15px">
@@ -60,7 +60,8 @@
 
 
 
-                    <button mat-mini-fab class="labelButton" [ngStyle]="{background: value.color}">
+                    <button mat-mini-fab class="labelButton" [ngStyle]="{background: value.color}"
+                    (click)="navigateToLabel(label)">
                         <div fxLayout="row">
                             <a class="labelText">{{label.label}}</a>
                             <div [style.visibility]="labelHoverCheck(label,value) ? 'visible' : 'hidden'">
@@ -129,7 +130,7 @@
         <div class="labelsContainer" fxLayout="row">
 
 
-            <div *ngIf="value.reminder.length!=0">
+            <div *ngIf="value.reminder.length>0">
                 <button mat-mini-fab class="labelButton" [ngStyle]="{background: value.color}">
                     <div fxLayout="row">
                         <img src="../../../assets/icon/schedule-24px.svg" class="reminder" width="15px"
@@ -226,7 +227,7 @@
             <div class="labelsContainer" fxLayout="row">
 
 
-                <div *ngIf="value.reminder.length!=0">
+                <div *ngIf="value.reminder.length>0">
                     <button mat-mini-fab class="labelButton" [ngStyle]="{background: value.color}">
                         <div fxLayout="row">
                             <img src="../../../assets/icon/schedule-24px.svg" class="reminder" width="15px"

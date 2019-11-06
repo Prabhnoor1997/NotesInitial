@@ -1,4 +1,4 @@
-<div class="bod" fxFlex="100" fxLayoutAlign="center center">
+<div class="bod" fxFlex="100" fxLayoutAlign="space-evenly center">
   <mat-card fxFlex="40" fxFlex.xs="100" class="registerContainer" fxLayout="column">
     <mat-card-content class="fundooNotesLogo" fxFlex="100" fxLayoutAlign="space-around stretch">
       <img src="../../assets/images/output-onlinepngtools.png" width="275">
@@ -39,6 +39,36 @@
         </mat-form-field>
 
       </form>
+      <div class="card-container" fxLayout="row" fxLayoutAlign="space-evenly center">
+        <mat-card class="mat-card-container" [style.backgroundColor]="advanceColor">
+          <mat-card-title class="title">
+            price $99:price per month
+          </mat-card-title>
+          <p class="service">advance</p>
+          <div>
+            <mat-list class="list">
+              <mat-list-item class="listItem">$99/month</mat-list-item>
+              <mat-list-item class="listItem">Ability to add title, description, images, labels, checklist and
+                colors
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </mat-card>
+        <mat-card class="mat-card-container" [style.backgroundColor]="basicColor">
+          <mat-card-title class="title">
+            price $45:price per month
+          </mat-card-title>
+          <p class="service">basic</p>
+          <div>
+            <mat-list class="list">
+              <mat-list-item class="listItem">$45/month</mat-list-item>
+              <mat-list-item class="listItem">Ability to add only title and description
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </mat-card>
+    
+      </div>
 
       <mat-card-actions fxLayout="row" fxLayoutAlign="space-evenly center">
         <button mat-raised-button [disabled]= validate(email.invalid,password.invalid,ConfirmPassword.invalid,password.value,ConfirmPassword.value) (click)="registerUser(fname.value,lname.value,email.value,password.value,ConfirmPassword.value)">REGISTER</button>

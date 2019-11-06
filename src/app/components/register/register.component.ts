@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { AppServiceService } from '../../services/app-service.service'
 import { Router } from '@angular/router'
 import { DataService } from '../../services/data.service'
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -17,9 +18,12 @@ export class RegisterComponent implements OnInit {
   public email = new FormControl('', [Validators.required, Validators.email]);
   public password = new FormControl('', [Validators.required, Validators.minLength(8),Validators.pattern("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?:[@#$%&]*).{8,}$")]);
   public ConfirmPassword = new FormControl('', [Validators.required, Validators.minLength(8)]);
+  service:string;
+  advanceColor:string="white";
+  basicColor:string="white";
 
 
-  constructor(private appService: AppServiceService, private routing: Router) {
+  constructor(private appService: AppServiceService, private routing: Router,private dataService:DataService) {
 
   }
 
@@ -78,9 +82,9 @@ export class RegisterComponent implements OnInit {
       var user = {
         "firstName": fName,
         "lastName": lName,
-        "service": "advance",
         "email": email,
-        "password": password
+        "password": password,
+        "service":this.service
       }
 
       console.log(user)
@@ -101,6 +105,24 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.appService)
+    this.dataService.currentMessage.subscribe((message)=>{
+      if(message=="advance"||"basic")
+      {
+        this.service=message;
+        this.checkService(message);
+        //console.log("assdasdasdasdasd",message)
+
+      }
+      
+    })
+  }
+
+  checkService(service){
+    if(service=="advance")
+      this.advanceColor="#ccac66"
+    else
+    this.basicColor="#ccac66"
+
   }
   
 }

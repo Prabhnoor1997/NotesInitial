@@ -1,0 +1,42 @@
+
+<div>
+  <div>
+    <p class="heading1" fxLayout="row" fxLayoutAlign="center start">fundooNotes offered. Choose below service to
+      Register.</p>
+  </div>
+
+  <div class="card-container" fxLayout="row" fxLayoutAlign="space-evenly center">
+    <mat-card class="mat-card-container" (click)="advanceService()">
+      <mat-card-title class="title">
+        price $99:price per month
+      </mat-card-title>
+      <p class="service">advance</p>
+      <div>
+        <mat-list class="list">
+          <mat-list-item class="listItem">$99/month</mat-list-item>
+          <mat-list-item class="listItem">Ability to add title, description, images, labels, checklist and
+            colors
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </mat-card>
+    <mat-card class="mat-card-container" (click)="basicService()">
+      <mat-card-title class="title">
+        price $45:price per month
+      </mat-card-title>
+      <p class="service">basic</p>
+      <div>
+        <mat-list class="list">
+          <mat-list-item class="listItem">$45/month</mat-list-item>
+          <mat-list-item class="listItem">Ability to add only title and description
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </mat-card>
+
+  </div>
+  <div>
+    <p class="sign-in" fxLayout="row" fxLayoutAlign="center start" style="color: rgb(128, 114, 69)" (click)=signIn()>Sign in Instead
+    </p>
+  </div>
+</div>
